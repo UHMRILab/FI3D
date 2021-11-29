@@ -93,3 +93,15 @@ for templateSourceFileName in sources:
       sourceFile.write(templateSource)
       sourceFile.close()
       
+# Create the README
+print("Creating README file")
+templateReadmeFile = open("TEMPLATE/README.md", 'r')
+templateReadme = templateReadmeFile.read()
+templateReadmeFile.close()
+
+templateReadme = templateReadme.replace("TEMPLATE", moduleAcronym)
+templateReadme = templateReadme.replace("MODULE-NAME", moduleName)
+
+readmeFIle = open(moduleAcronym + "/README.md", "w")
+readmeFIle.write(templateReadme)
+readmeFIle.close()
