@@ -24,7 +24,7 @@ void FloatInteraction::setValueAsJson(const QJsonValue& value) {
 }
 
 double FloatInteraction::getValue() const {
-	return this->getValueAsJson().toInt();
+	return this->getValueAsJson().toDouble();
 }
 
 void FloatInteraction::setValue(const double& value) {
