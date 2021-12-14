@@ -109,6 +109,9 @@ protected:
 	/// @brief Whether a render call is scheduled.
 	bool mIsRenderScheduled;
 
+	/// @brief Flag used to tell when rendering should be paused.
+	bool mIsRenderPaused;
+
 public:
 	/*!
 	* @brief Constructor of the scene.
@@ -291,7 +294,7 @@ public slots:
 	virtual void removePartFromAssembly(const QString& partID, const QString& visualID);
 	/// @}
 
-protected:
+public:
 	/// @brief Change the interactor style in the Scene.
 	virtual void setInteractorStyle(vtkSmartPointer<vtkInteractorStyle> interactorStyle);
 
@@ -335,7 +338,16 @@ public slots:
 	/// @brief Resets and renders the window.
 	virtual void resetCamera();
 
+	/// @brief Pauses rendering until resumeRender is called.
+	virtual void pauseRender();
+
+	/// @brief Resumes rendering, called after pause. If pause wasn't
+	/// called before, it becomes a simple render call.
+	virtual void resumeRender();
+
 public:
+	virtual bool isRenderPaused() const;
+
 	/// @brief Given the a coordinate (x, y, z), compute its location 
 	/// on the display
 	void worldToDisplay(const double& x, const double& y, const double&z, double& i, double& j);

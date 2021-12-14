@@ -19,6 +19,7 @@
 
 #include <QSharedPointer>
 
+#include <vtkPropPicker.h>
 #include <vtkCellPicker.h>
 #include <vtkInteractorStyleTrackballCamera.h>
 #include <vtkSmartPointer.h>
@@ -79,8 +80,12 @@ protected:
 	/// @brief The scene this InteractorStyle is in charge of. 
 	InteractiveScene* mScene;
 
-	/// @brief The picker used to pick actors in the scene.
-	vtkSmartPointer<vtkCellPicker> mPicker;
+	/// @brief Finds a point in an actor that collides with the mouse cursor.
+	/// NOTE: Doesn't seem to work with slices.
+	vtkSmartPointer<vtkPropPicker> mPointPicker;
+
+	/// @brief Finds a cell that collides with the mouse cursor.
+	vtkSmartPointer<vtkCellPicker> mCellPicker;
 
 	/// @brief The Visual3D that is being interacted with.
 	Visual3DPtr mPickedObject;
@@ -137,9 +142,12 @@ public:
 	virtual void Pan() override;
 	/// @}
 
-private:
-	/// @brief Determine picked Visual3D based on mouse location.
-	void findPickedVisual3D();
+protected:
+	/// @brief Determine picked point with a visual at the mouse location.
+	void findPickedPoint();
+
+	/// @brief Determine picked cell in a visual at the mouse location.
+	void findPickedCell();
 
 signals:
 	/*!
@@ -153,4 +161,8 @@ signals:
     void feedbackColor(const QString& text, const Qt::GlobalColor& color) override;
 	/// @}
 };
+
+/// @brief Alias for a smart pointer of this class.
+using InteractorStyleVPtr = vtkSmartPointer<InteractorStyle>;
+
 }

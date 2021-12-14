@@ -32,7 +32,7 @@ Scene::Scene(QVTKOpenGLWidget* widget, const QString& id)
 	mImageSlices(), mStudySlices(), mModels(), mAnimatedStudySlices(),
 	mAnimatedModels(), mAssemblies(), mSubtitles(),
 	mActorsToNames(),
-	mTimeFromLastRender(0), mIsRenderScheduled(false)
+	mTimeFromLastRender(0), mIsRenderScheduled(false), mIsRenderPaused(false)
 {
 	mRenderWindow->AddRenderer(mRenderer);
 	mRenderWindow->SetInteractor(mInteractor);
@@ -772,6 +772,10 @@ bool Scene::getAxesVisible() const {
 }
 
 void Scene::render() {
+	if (mIsRenderPaused) {
+		return;
+	}
+
 	int currentTime = QTime::currentTime().msecsSinceStartOfDay();
 	int dif = currentTime - mTimeFromLastRender;
 
@@ -790,6 +794,19 @@ void Scene::render() {
 void Scene::resetCamera() {
 	mRenderer->ResetCamera();
 	emit changedCameraReset();
+}
+
+void Scene::pauseRender() {
+	mIsRenderPaused = true;
+}
+
+void Scene::resumeRender() {
+	mIsRenderPaused = false;
+	this->render();
+}
+
+bool Scene::isRenderPaused() const {
+	return mIsRenderPaused;
 }
 
 void Scene::worldToDisplay(const double& x, const double& y, const double& z, double& i, double& j) {

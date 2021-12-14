@@ -18,6 +18,10 @@ ImageSlice::ImageSlice(const QString& name, ESliceOrientation orientation,
 	mMapper(vtkSmartPointer<vtkImageSliceMapper>::New()),
 	mActor(vtkSmartPointer<vtkImageActor>::New())
 {
+	if (data.Get() == Q_NULLPTR) {
+		mImageData = ImageDataVPtr::New();
+	}
+
 	mMapper->SetInputData(mImageData);
 	mActor->SetMapper(mMapper);
 	mActor->SetUserTransform(this->getTransform());

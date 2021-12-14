@@ -112,7 +112,7 @@ protected:
 	 * derived classes to override and use new ModuleInformation, which can only
 	 * be assigned by the ModuleHandler. Internally, this function does nothing.
 	 */
-	virtual void moduleInformationAssigned(ModuleInformationPtr moduleInfo) const;
+	virtual void moduleInformationAssigned(ModuleInformationPtr moduleInfo);
 
 private:
 	/// @brief Sets the ModuleInformation, set by the ModuleHandler.

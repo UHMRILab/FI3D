@@ -67,7 +67,7 @@ private slots:
 
 protected:
 	/// @brief Listen to changes about the ModuleInformation.
-	virtual void moduleInformationAssigned(fi3d::ModuleInformationPtr moduleInfo) const override;
+	virtual void moduleInformationAssigned(fi3d::ModuleInformationPtr moduleInfo) override;
 };
 
 /// @brief Alias for a smart pointer of this class.

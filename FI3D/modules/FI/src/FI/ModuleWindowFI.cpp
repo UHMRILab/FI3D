@@ -397,7 +397,7 @@ void ModuleWindowFI::onModuleInteractionRemoved(const QString& interactionID) {
 	}
 }
 
-void ModuleWindowFI::moduleInformationAssigned(ModuleInformationPtr moduleInfo) const {
+void ModuleWindowFI::moduleInformationAssigned(ModuleInformationPtr moduleInfo) {
 	QObject::connect(
 		this->getModuleInformationObject(), &ModuleInformation::changedAddedInteraction,
 		this, &ModuleWindowFI::onModuleInteractionAdded,

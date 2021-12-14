@@ -134,7 +134,7 @@ public:
 	/// @brief Destructor.
 	~ModuleMessageEncoder();
 
-	virtual void moduleInformationAssigned(ModuleInformationPtr moduleInfo) const override;
+	virtual void moduleInformationAssigned(ModuleInformationPtr moduleInfo) override;
 
 public:
 	/// @brief Parses the given request. 

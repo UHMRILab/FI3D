@@ -24,10 +24,11 @@ InteractorStyle::InteractorStyle()
 	mMousePosition{0, 0}, mLastMousePosition{0, 0},
 	mLeftClickPosition{0, 0}, mMiddleClickPosition{0, 0}, mRightClickPosition{0, 0},
 	mScene(Q_NULLPTR), 
-	mPicker(vtkSmartPointer<vtkCellPicker>::New()),
+	mPointPicker(vtkSmartPointer<vtkPropPicker>::New()),
+	mCellPicker(vtkSmartPointer<vtkCellPicker>::New()),
 	mPickedObject(Q_NULLPTR)
 {
-	mPicker->SetTolerance(0.001);
+	mCellPicker->SetTolerance(0.001);
 }
 
 InteractorStyle::~InteractorStyle() {}
@@ -123,7 +124,7 @@ void InteractorStyle::OnLeftButtonDown() {
 	if (!mIsObjectKeyDown) {
 		vtkInteractorStyleTrackballCamera::OnLeftButtonDown();
 	} else {
-		this->findPickedVisual3D();
+		this->findPickedCell();
 		if (mPickedObject.isNull()) {
 			return;
 		} else {
@@ -159,7 +160,7 @@ void InteractorStyle::OnMiddleButtonDown() {
 	if (!mIsObjectKeyDown) {
 		vtkInteractorStyleTrackballCamera::OnMiddleButtonDown();
 	} else {
-		this->findPickedVisual3D();
+		this->findPickedCell();
 		if (mPickedObject.isNull()) {
 			return;
 		} else {
@@ -191,7 +192,7 @@ void InteractorStyle::OnRightButtonDown() {
 	if (!mIsObjectKeyDown) {
 		vtkInteractorStyleTrackballCamera::OnRightButtonDown();
 	}
-	this->findPickedVisual3D();
+	this->findPickedCell();
 }
 
 void InteractorStyle::OnRightButtonUp() {
@@ -222,7 +223,7 @@ void InteractorStyle::OnMouseWheelBackward() {
 		return;
 	}
 
-	this->findPickedVisual3D();
+	this->findPickedCell();
 	if (mPickedObject.isNull()) {
 		return;
 	}
@@ -247,7 +248,7 @@ void InteractorStyle::OnMouseWheelForward() {
 		return;
 	}
 
-	this->findPickedVisual3D();
+	this->findPickedCell();
 	if (mPickedObject.isNull()) {
 		return;
 	}
@@ -410,11 +411,20 @@ void InteractorStyle::Pan() {
 	rwi->Render();
 }
 
-void InteractorStyle::findPickedVisual3D() {
+void InteractorStyle::findPickedPoint() {
 	if (mScene == Q_NULLPTR) {
 		return;
 	}
-	mPicker->Pick(mMousePosition[0], mMousePosition[1], 0.0, mScene->mRenderer);
-	vtkProp* prop = mPicker->GetViewProp();
+	mPointPicker->Pick(mMousePosition[0], mMousePosition[1], 0.0, mScene->mRenderer);
+	vtkProp* prop = mPointPicker->GetViewProp();
+	mPickedObject = mScene->getVisual3D(mScene->getVisualIDByProp(prop));
+}
+
+void InteractorStyle::findPickedCell() {
+	if (mScene == Q_NULLPTR) {
+		return;
+	}
+	mCellPicker->Pick(mMousePosition[0], mMousePosition[1], 0.0, mScene->mRenderer);
+	vtkProp* prop = mCellPicker->GetViewProp();
 	mPickedObject = mScene->getVisual3D(mScene->getVisualIDByProp(prop));
 }

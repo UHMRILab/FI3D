@@ -20,6 +20,17 @@ void StudySliceViewer2D::setStudy(StudyPtr study) {
 		return;
 	}
 
+	if (!mStudy.isNull()) {
+		// Remove old study's signals
+		QObject::disconnect(
+			mStudy.get(), &Study::changedRemovedSeries,
+			this, &StudySliceViewer2D::onRemovedSeries);
+		// Remove old study's signals
+		QObject::disconnect(
+			mStudy.get(), &Study::changedData,
+			this, &StudySliceViewer2D::onDataUpdated);
+	}
+
 	if (study.isNull()) {
 		mStudy.reset(new Study(""));
 	} else {
@@ -54,6 +65,18 @@ void StudySliceViewer2D::setStudy(StudyPtr study) {
 	}
 
 	emit changedSeriesIndex(mSeriesIndex);
+
+	// Correct the rendered slice if the removed series is affected
+	QObject::connect(
+		mStudy.get(), &Study::changedRemovedSeries,
+		this, &StudySliceViewer2D::onRemovedSeries,
+		Qt::UniqueConnection
+	);
+	// Re-emit signal when visualized data changes internally
+	QObject::connect(
+		mStudy.get(), &Study::changedData,
+		this, &StudySliceViewer2D::onDataUpdated,
+		Qt::UniqueConnection);
 }
 
 StudyPtr StudySliceViewer2D::getStudy() {
@@ -111,6 +134,32 @@ void StudySliceViewer2D::setSeriesIndex(const int& seriesIndex) {
 	emit changedSliceIndices(this->getSliceMinIndex(), this->getSliceMaxIndex());
 	emit changedSlice(this->getSliceIndex(), mOrientation);
 	qDebug() << "Enter";
+}
+
+void StudySliceViewer2D::onRemovedSeries(SeriesDataVPtr removedSeries) {
+	int seriesIndex = removedSeries->getSeriesIndex();
+
+	if (seriesIndex > mSeriesIndex) {
+		return;
+	} else if (seriesIndex == mSeriesIndex) {
+		if (mStudy->isSeriesIndexInRange(seriesIndex)) {
+			// Temporarely set to 0 and reassign so the new slice in that
+			// position gets rendered
+			mSeriesIndex = 0;
+			this->setSeriesIndex(seriesIndex);
+		} else {
+			// If it was the last one to be removed, go back down by 1
+			this->setSeriesIndex(seriesIndex - 1);
+		}
+	} else {
+		// Don't do anything, simply change the current series to be 1
+		// minus than what it used to be
+		mSeriesIndex -= 1;
+	}
+}
+
+void StudySliceViewer2D::onDataUpdated() {
+	emit changedStudy(mStudy);
 }
 
 int StudySliceViewer2D::getSeriesIndex() const {

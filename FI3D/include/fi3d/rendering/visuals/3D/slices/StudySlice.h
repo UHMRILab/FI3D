@@ -105,6 +105,9 @@ public:
 	/// @}
 
 private slots:
+	/// @brief Handles a series being removed.
+	void onRemovedSeries(SeriesDataVPtr removedSeries);
+
 	/// @brief Catches the changedData signal from the assigned Study and
 	/// remits it as the local changedStudy signal
 	void onDataUpdated();

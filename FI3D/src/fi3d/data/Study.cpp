@@ -47,6 +47,21 @@ SeriesDataVPtr Study::createAndAddSeries() {
 	return series;
 }
 
+bool Study::removeSeries(const int& index) {
+	if (!isSeriesIndexInRange(index)) {
+		return false;
+	}
+
+	SeriesDataVPtr series = mSeriesSet.takeAt(index);
+	
+	for (int i = index; i < mSeriesSet.count(); i++) {
+		mSeriesSet.at(i)->setSeriesIndex(i);
+	}
+
+	emit changedRemovedSeries(series);
+	return true;
+}
+
 int Study::getSeriesCount() const {
 	return mSeriesSet.size();
 }

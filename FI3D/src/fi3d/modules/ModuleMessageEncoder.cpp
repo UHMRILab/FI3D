@@ -29,7 +29,7 @@ ModuleMessageEncoder::ModuleMessageEncoder()
 
 ModuleMessageEncoder::~ModuleMessageEncoder() {}
 
-void ModuleMessageEncoder::moduleInformationAssigned(ModuleInformationPtr moduleInfo) const {
+void ModuleMessageEncoder::moduleInformationAssigned(ModuleInformationPtr moduleInfo) {
 	if (moduleInfo == Q_NULLPTR) {
 		return;
 	}

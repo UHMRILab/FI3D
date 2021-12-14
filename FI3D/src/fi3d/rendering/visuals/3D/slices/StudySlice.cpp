@@ -22,10 +22,15 @@ void StudySlice::setStudy(StudyPtr study) {
 		return;
 	}
 
-	// Re-emit signal when visualized data changes internally
-	QObject::disconnect(
-		mStudy.get(), &Study::changedData,
-		this, &StudySlice::onDataUpdated);
+	if (!mStudy.isNull()) {
+		QObject::disconnect(
+			mStudy.get(), &Study::changedRemovedSeries,
+			this, &StudySlice::onRemovedSeries);
+		// Remove old study's signals
+		QObject::disconnect(
+			mStudy.get(), &Study::changedData,
+			this, &StudySlice::onDataUpdated);
+	}
 
 	if (study.isNull()) {
 		mStudy.reset(new Study(""));
@@ -53,6 +58,11 @@ void StudySlice::setStudy(StudyPtr study) {
 	
 	emit changedSeriesIndex(mSeriesIndex);
 
+	// Correct the rendered slice if the removed series is affected
+	QObject::connect(
+		mStudy.get(), &Study::changedRemovedSeries,
+		this, &StudySlice::onRemovedSeries,
+		Qt::UniqueConnection);
 	// Re-emit signal when visualized data changes internally
 	QObject::connect(
 		mStudy.get(), &Study::changedData,
@@ -149,6 +159,35 @@ bool StudySlice::isSeriesIndexInRange(const int& seriesIndex) {
 
 EVisual StudySlice::getVisualType() const {
 	return EVisual::STUDY_IMAGE_SLICE;
+}
+
+void StudySlice::onRemovedSeries(SeriesDataVPtr removedSeries) {
+	int seriesIndex = removedSeries->getSeriesIndex();
+
+	// If it was the last series, then set back to an empty study
+	if (mStudy->getSeriesCount() == 0) {
+		mSeriesIndex = -1;
+		this->setImageData(Q_NULLPTR);
+		return;
+	}
+
+	if (seriesIndex > mSeriesIndex) {
+		return;
+	} else if (seriesIndex == mSeriesIndex) {
+		if (mStudy->isSeriesIndexInRange(seriesIndex)) {
+			// Temporarely set to -1 and reassign so the new slice in that
+			// position gets rendered
+			mSeriesIndex = -1;
+			this->setSeriesIndex(seriesIndex);
+		} else {
+			// If it was the last one to be removed, go back down by 1
+			this->setSeriesIndex(seriesIndex - 1);
+		}
+	} else {
+		// Don't do anything, simply change the current series to be 1
+		// minus than what it used to be
+		mSeriesIndex -= 1;
+	}
 }
 
 void StudySlice::onDataUpdated() {

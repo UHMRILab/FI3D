@@ -118,7 +118,7 @@ ModuleInformation* ModuleElement::getModuleInformationObject() const {
 	return mModuleInformation.data();
 }
 
-void ModuleElement::moduleInformationAssigned(ModuleInformationPtr moduleInfo) const {}
+void ModuleElement::moduleInformationAssigned(ModuleInformationPtr moduleInfo) {}
 
 void ModuleElement::setModuleInformation(ModuleInformationPtr moduleInfo) {
 	mModuleInformation = moduleInfo;

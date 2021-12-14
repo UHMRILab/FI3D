@@ -75,6 +75,14 @@ public slots:
 	/// @brief Set the series index to select from the study.
 	void setSeriesIndex(const int& seriesIndex);
 
+private slots:
+	/// @brief Handles a series being removed.
+	void onRemovedSeries(SeriesDataVPtr removedSeries);
+
+	/// @brief Catches the changedData signal from the assigned Study and
+	/// remits it as the local changedStudy signal
+	void onDataUpdated();
+
 public:
 	/// @brief Gets the index of the series that is currently visualized.
 	int getSeriesIndex() const;

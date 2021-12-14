@@ -29,6 +29,9 @@ signals:
 	/// @brief Signal indicating a series was added to the study.                 
 	void changedAddedSeries(fi3d::SeriesDataVPtr series);
 
+	/// @brief Signal indicating a series was removed from the study.
+	void changedRemovedSeries(fi3d::SeriesDataVPtr series);
+
 private:
 	/// @brief The patient ID of the study.
 	QString mPatientID;
@@ -64,6 +67,10 @@ public:
 
 	/// @breif Creates a new series and adds it to the study.
 	SeriesDataVPtr createAndAddSeries();
+
+	/// @brief Removes the series at the given index, returns if
+	/// removed successfully.
+	bool removeSeries(const int& index);
 
 	/// @brief Get the number of data sets (series) in the study.
 	int getSeriesCount() const;
