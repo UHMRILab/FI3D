@@ -13,7 +13,7 @@ Despite its current uses, there are many features envisioned for the FI3D framew
 FI3D Beta Version: 1.0.0
 
 Executables:
-* [Windows 64-bit Beta v1.0.0](Builds/Windows_FI3D_Beta_v1.0.0.zip)
+* [Windows 64-bit Beta v1.0.0](Builds/Windows_64-bit_FI3D_Beta_v1.0.0)
   * <b>Note:</b> This build includes the `Framework Interface (FI)` and `Demonstration (DEMO)` modules.
 
 # Development Setup
@@ -27,8 +27,6 @@ The basic setup requires [CMake >3.13](https://cmake.org/download/), [Qt 5.14.2]
 # FI3D Architecture
 
 The FI3D is a framework that provides tools for remote control and visualization (with an emphasis on augmented reality devices). The framework features two key foundational self-contained applications: components and modules. Components are functionalities available to the entire FI3D. They adhere to the singleton pattern because only one instance of it may run throughout the execution of the application. These components are generally used as interfaces for peripherals, remote connections for data exchange, etc. Modules are applications with certain logic,  visualization, and manipulation. They have a GUI to be interacted with and many instances of the same module may be instantiated at the same time. Additionally, modules may use components for certain tasks. For example, a module which visualizes imaging data may use a component in charge of requesting data from a data base. Using these two, the system can separate services that are general and useful (components) to any module vs specific use cases (modules). 
-
-To read more on the architure [click here](Documentation/FI3DArchitecture.MD)
 
 ## Generators
 
