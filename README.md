@@ -13,7 +13,7 @@ Despite its current uses, there are many features envisioned for the FI3D framew
 FI3D Beta Version: 1.0.0
 
 Executables:
-* [Windows 64-bit Beta v1.0.0](Builds/Windows_64-bit_FI3D_Beta_v1.0.0)
+* [Windows 64-bit Beta v1.0.0](Builds/Windows_64-bit_FI3D_Beta_v1.0.0.zip)
   * <b>Note:</b> This build includes the `Framework Interface (FI)` and `Demonstration (DEMO)` modules.
 
 # Development Setup
