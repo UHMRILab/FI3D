@@ -112,6 +112,7 @@ ENDFOREACH()
 
 #======================= Find and Include Modules =======================#
 set(MODULE_ACRONYMS)
+set(ENABLED_MODULES)
 SUBDIRLIST(FI3D_MODULES_DIRS ${CMAKE_SOURCE_DIR}/modules)
 FOREACH(fi3dModuleDir ${FI3D_MODULES_DIRS})
     if (EXISTS "${CMAKE_SOURCE_DIR}/modules/${fi3dModuleDir}/CMakeLists.txt")
@@ -204,7 +205,7 @@ if (BUILD_AS_DEPLOY)
         COMMAND "${CMAKE_COMMAND}" -E copy_directory 
         ${CMAKE_SOURCE_DIR}/assets
         "${CMAKE_BINARY_DIR}/$<CONFIG>/assets")
-    FOREACH(acronym ${MODULE_ACRONYMS})
+    FOREACH(acronym ${ENABLED_MODULES})
         add_custom_command(TARGET FI3D POST_BUILD
             COMMAND "${CMAKE_COMMAND}" -E copy_directory 
             ${CMAKE_SOURCE_DIR}/modules/${acronym}/assets

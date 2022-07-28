@@ -10,10 +10,10 @@ The framework design was first published in the [Computer Methods and Programs i
 
 Despite its current uses, there are many features envisioned for the FI3D framework. Thus, it is currently marked as beta.
 
-FI3D Beta Version: 1.0.0
+FI3D Beta Version: 1.0.1
 
 Executables:
-* [Windows 64-bit Beta v1.0.0](Builds/Windows_64-bit_FI3D_Beta_v1.0.0.zip)
+* [Windows 64-bit Beta v1.0.1](Builds/Windows_64-bit_FI3D_Beta_v1.0.1.zip)
   * <b>Note:</b> This build includes the `Framework Interface (FI)` and `Demonstration (DEMO)` modules.
 
 # Development Setup

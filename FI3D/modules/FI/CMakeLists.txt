@@ -24,6 +24,8 @@ if (MODULE_FI_ENABLE)
     
     set(FI3D_SOURCES ${FI3D_SOURCES} ${MODULE_FI_SOURCES})
     set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_AUTOUIC_SEARCH_PATHS} ${MODULE_FI_FORMS_DIR})
+
+    list(APPEND ENABLED_MODULES "FI")
 else()
     message("Module Disabled: FI")
 endif()
