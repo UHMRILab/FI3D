@@ -19,12 +19,6 @@ public:
 
 	/// @brief The path to the data directory.
 	static const QString DATA_DIRECTORY;
-	
-	/// @brief The path to the assets directory.
-	static const QString MODULES_ASSETS_DIRECTORY;
-
-	/// @brief The path to the data directory.
-	static const QString MODULES_DATA_DIRECTORY;
 
 	/// @brief Constructor.
 	FI3D();

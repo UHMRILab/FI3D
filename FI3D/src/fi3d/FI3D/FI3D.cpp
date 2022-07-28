@@ -34,18 +34,6 @@
     const QString fi3d::FI3D::DATA_DIRECTORY = QCoreApplication::applicationDirPath();
 #endif
 
-#ifdef FI3D_MODULES_ASSETS_PATH
-	const QString fi3d::FI3D::MODULES_ASSETS_DIRECTORY = FI3D_MODULES_ASSETS_PATH;
-#else
-	const QString fi3d::FI3D::ASSETS_DIRECTORY = QCoreApplication::applicationDirPath();
-#endif
-
-#ifdef FI3D_MODULES_DATA_PATH
-	const QString fi3d::FI3D::MODULES_DATA_DIRECTORY = FI3D_MODULES_DATA_PATH;
-#else
-	const QString fi3d::FI3D::DATA_DIRECTORY = QCoreApplication::applicationDirPath();
-#endif
-
 using namespace fi3d;
 
 FI3D::FI3D() {}
@@ -99,8 +87,6 @@ int FI3D::run(int argc, char *argv[]) {
 
 	qInfo() << "Assets:" << ASSETS_DIRECTORY;
 	qInfo() << "Data  :" << DATA_DIRECTORY;
-	qInfo() << "Module Assets:" << MODULES_ASSETS_DIRECTORY;
-	qInfo() << "Module Data  :" << MODULES_DATA_DIRECTORY;
 	qInfo() << "SSL Compilation Version: " << QSslSocket::sslLibraryBuildVersionString();
 	qInfo() << "SSL Current Version: " << QSslSocket::sslLibraryVersionString();
 	qInfo() << "SSL Enabled: " << QSslSocket::supportsSsl();

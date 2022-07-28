@@ -30,11 +30,20 @@ QString ModuleElement::getModuleID() const {
 }
 
 QString ModuleElement::getModuleAssetsPath() const {
-	return QObject::tr("%1/%2/assets").arg(FI3D::MODULES_ASSETS_DIRECTORY).arg(this->getModuleAcronym());
+#if BUILD_AS_DEPLOY
+	return QObject::tr("%1/modules/%2").arg(FI3D::ASSETS_DIRECTORY).arg(this->getModuleAcronym());
+#else
+	
+	return QObject::tr("%1/../modules/%2/assets").arg(FI3D::ASSETS_DIRECTORY).arg(this->getModuleAcronym());
+#endif
 }
 
 QString ModuleElement::getModuleDataPath() const {
-	return QObject::tr("%1/%2/data").arg(FI3D::MODULES_DATA_DIRECTORY).arg(this->getModuleAcronym());
+#if BUILD_AS_DEPLOY
+	return QObject::tr("%1/modules/%2").arg(FI3D::DATA_DIRECTORY).arg(this->getModuleAcronym());
+#else
+	return QObject::tr("%1/../modules/%2/data").arg(FI3D::DATA_DIRECTORY).arg(this->getModuleAcronym());
+#endif
 }
 
 ModuleHandler* ModuleElement::getModuleHandler() {
