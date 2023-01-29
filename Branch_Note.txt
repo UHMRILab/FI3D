@@ -1,0 +1,3 @@
+Branch: Khang_b001_2023_01_26
+For development with Qt 5.14.2, VTK 8.2.0 and MSVC v141 - VS 2017 C++ x64/x86 build tools (v14.16).
+Non-effecting factors: Microsoft Visual Studio (Community 2022); CMake (3.25.2).
