@@ -1,1 +1,0 @@
-Nothing. Just placeholder to enable adding the components directory.
