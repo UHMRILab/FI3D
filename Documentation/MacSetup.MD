@@ -43,35 +43,25 @@ Download VTK source code from [here](https://www.vtk.org/download/). Then, follo
   * Select the `build` folder
 * Click `Configure`
 * Select Unix Makefiles
-* Check the options `VTK_Group_Qt` and `VTK_Group_Imaging`
+* Set `VTK_GROUP_ENABLE_Qt` to `WANT`
+* Set `VTK_GROUP_ENABLE_Imaging` to `WANT`
+* Click `Configure`
+* Check the `Advanced` option
+* Search for `vtkDICOM`
+* Set `VTK_MODULE_ENABLE_VTK_vtkDICOM` to `WANT`
 * Set `CMAKE_BUILD_TYPE` to `Release`
 * Set the `CMAKE_INSTALL_PREFIX` to the location where VTK should be installed
   * <b>Note</b> I recommend to leave the default value.
+* Click `Configure` again
+* Click `Generate`
 * Open the `build` directory with a terminal
 * run the command `make` to compile VTK libraries
 * run the command `sudo make install` to install VTK library
 
 ## vtkDICOM
+<b>Note</b>: Leaving this here for documentation. We used to build this library from scrach and include it. However, we now include it as part of the VTK installation (as shown in the prervious steps with the vtkDICOM module).
 
-Clone the source code from [here](https://github.com/dgobbi/vtk-dicom). Then, follow these steps:
-
-* Open CMake
-* Click `Browse Source` and select the cloned directory
-* Click `Browse Build`
-  * Go to the same cloned directory
-  * Create a new folder called `build`
-  * Select the `build` folder
-* Click `Configure`
-* Select Unix Makefiles
-* If CMake fails to find VTK
-  * Set the directory to: `(VTK Install Path)/lib/cmake/vtk-8.2`
-* Select `BUILD_SHARED_LIBRARIES`
-* Set `CMAKE_BUILD_TYPE` to `Release`
-* Click `Configure`
-* Click `Generate`
-* Open the `build` directory with a terminal
-* run the command `make` to compile VTKDICOM libraries
-* run the command `sudo make install` to install VTKDICOM
+Repository for module can be found [here](https://github.com/dgobbi/vtk-dicom).
 
 ## CUDA_v10.0 - OPTIONAL
 
@@ -94,6 +84,8 @@ Open the CMake file with Qt Creator. It'll run CMake on it and build and setup a
 * Select `Release` on the left bottom pane (has a Monitor icon)
   * <b>Note:</b> can select `Release with Debug Information` when debugging is needed.
 * Click `Configure Project`
+* Select any component to include in the build
+  * Components are identified by their variable options `Component_*_ENABLE`
 * Select any module to include in the build
   * Modules are identified by their variable options `Module_*_ENABLE`
 * Click `Run` (The green Triangle on the left pane, under Monitor icon)
