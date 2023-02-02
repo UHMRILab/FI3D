@@ -13,6 +13,6 @@ ModuleWindowTEMPLATE::ModuleWindowTEMPLATE()
 
 ModuleWindowTEMPLATE::~ModuleWindowTEMPLATE() {}
 
-QVTKOpenGLWidget* ModuleWindowTEMPLATE::getSceneWidget() {
+QVTKOpenGLStereoWidget* ModuleWindowTEMPLATE::getSceneWidget() {
 	return mGUI->Frame3D;
 }
