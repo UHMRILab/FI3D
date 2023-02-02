@@ -1,5 +1,6 @@
 FI3D/build/*
 FI3D/data/*
+FI3D/components/*
 FI3D/modules/*
 !FI3D/modules/DEMO
 !FI3D/modules/FI
