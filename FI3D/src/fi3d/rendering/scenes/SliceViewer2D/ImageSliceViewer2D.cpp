@@ -4,7 +4,7 @@
 
 #include <fi3d/utilities/ModelAlgorithms.h>
 
-#include <QVTKOpenGLWidget.h>
+#include <QVTKOpenGLStereoWidget.h>
 
 #include <vtkCellPicker.h>
 #include <vtkEventQtSlotConnect.h>
@@ -19,7 +19,7 @@
 
 using namespace fi3d;
 
-ImageSliceViewer2D::ImageSliceViewer2D(QVTKOpenGLWidget* widget, const QString& id, ESliceOrientation orientation)
+ImageSliceViewer2D::ImageSliceViewer2D(QVTKOpenGLStereoWidget* widget, const QString& id, ESliceOrientation orientation)
 	: Scene(widget, id),
 	mImageData(ImageDataVPtr::New()),
 	mOrientation(orientation),

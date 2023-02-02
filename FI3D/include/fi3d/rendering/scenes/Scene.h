@@ -21,7 +21,7 @@
 
 #include <vtkSmartPointer.h>
 
-class QVTKOpenGLWidget;
+class QVTKOpenGLStereoWidget;
 class QVTKInteractor;
 
 class vtkAxesActor;
@@ -57,7 +57,7 @@ protected:
 	QString mSceneID;
 
 	/// @brief The widget that this scene is assigned to.
-	QVTKOpenGLWidget* mWidget;
+	QVTKOpenGLStereoWidget* mWidget;
 
 	/// @brief The render window.
 	vtkSmartPointer<vtkGenericOpenGLRenderWindow> mRenderWindow;
@@ -120,7 +120,7 @@ public:
 	*			render the visuals.
 	* @param name The name of this scene.
 	*/
-	Scene(QVTKOpenGLWidget* widget, const QString& id);
+	Scene(QVTKOpenGLStereoWidget* widget, const QString& id);
 
 	/// @brief Destructor. */
 	~Scene();

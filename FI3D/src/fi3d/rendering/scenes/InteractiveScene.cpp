@@ -15,7 +15,7 @@
 
 using namespace fi3d;
 
-InteractiveScene::InteractiveScene(QVTKOpenGLWidget* widget, const QString& id)
+InteractiveScene::InteractiveScene(QVTKOpenGLStereoWidget* widget, const QString& id)
 	: Scene(widget, id),
 	mInteractorStyle(vtkSmartPointer<InteractorStyle>::New()),
 	mLabelsMapper(vtkSmartPointer<vtkLabelPlacementMapper>::New()),

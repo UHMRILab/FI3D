@@ -52,7 +52,7 @@ protected:
 
 public:
 	/// @brief Constructor.
-	InteractiveScene(QVTKOpenGLWidget* widget, const QString& id = "");
+	InteractiveScene(QVTKOpenGLStereoWidget* widget, const QString& id = "");
 
 	/// @breif Destructor.
 	~InteractiveScene();

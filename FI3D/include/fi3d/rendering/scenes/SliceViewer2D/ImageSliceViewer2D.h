@@ -116,7 +116,7 @@ public:
 	* @param id The ID of this scene.
 	* @param orientation The initial orientation. Defaults to XY.
 	*/
-	ImageSliceViewer2D(QVTKOpenGLWidget* widget, const QString& id, 
+	ImageSliceViewer2D(QVTKOpenGLStereoWidget* widget, const QString& id,
 		ESliceOrientation orientation = ESliceOrientation::XY);
 
 	/*! @brief Destructor. */

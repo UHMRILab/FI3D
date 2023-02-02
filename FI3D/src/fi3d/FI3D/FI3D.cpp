@@ -14,12 +14,12 @@
 #include <QtWidgets/QApplication>
 
 #include <QAction>
-#include <QGamepadManager>
+//#include <QGamepadManager>
 #include <QFile>
 #include <QIcon>
 #include <QProgressDialog>
 #include <QSurfaceFormat>
-#include <QVTKOpenGLWidget.h>
+#include <QVTKOpenGLStereoWidget.h>
 
 
 #ifdef FI3D_ASSETS_PATH
@@ -43,8 +43,9 @@ FI3D::~FI3D() {}
 int FI3D::run(int argc, char *argv[]) {
 	QApplication qApplication(argc, argv);
 
-	QGamepadManager::instance();
-	qApplication.processEvents();
+	// - Had to comment out Gamepad related code because Qt6 doesn't have gamepad classes natively any more...
+	// QGamepadManager::instance();
+	// qApplication.processEvents();
 
 	QProgressDialog loaderMessage("Setting Utilities...", "Abort", 0, 100);
 	loaderMessage.setCancelButton(Q_NULLPTR);	// no cancel button
@@ -60,11 +61,10 @@ int FI3D::run(int argc, char *argv[]) {
 
 	// setup the logger
 	Logger::init();
-	QSurfaceFormat::setDefaultFormat(QVTKOpenGLWidget::defaultFormat());
+	QSurfaceFormat::setDefaultFormat(QVTKOpenGLStereoWidget::defaultFormat());
 
 	// Inform Qt of our variants, TODO: these 2 need to be removed.
-	qRegisterMetaType<fi3d::ESliceOrientation>("ESliceOrientation");
-	qRegisterMetaType<fi3d::EVisual>("EVisual");
+	//qRegisterMetaType<fi3d::ImageData>("ImageData");
 
     // Create data directories if they are non-existent
     if (Filer::checkAndCreateDirectory(DATA_DIRECTORY)) {

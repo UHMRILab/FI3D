@@ -231,7 +231,7 @@ void SliceViewer2DWidget::init() {
 
 	// Connect signals that handle GUI events, similar to any type of scene.
 	QObject::connect(
-		ui.Frame2D, &QVTKOpenGLWidget::customContextMenuRequested, 
+		ui.Frame2D, &QVTKOpenGLStereoWidget::customContextMenuRequested,
 		this, &SliceViewer2DWidget::rightClick, 
 		Qt::UniqueConnection);
 	QObject::connect(

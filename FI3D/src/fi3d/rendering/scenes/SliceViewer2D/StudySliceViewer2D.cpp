@@ -7,7 +7,7 @@
 
 using namespace fi3d;
 
-StudySliceViewer2D::StudySliceViewer2D(QVTKOpenGLWidget* widget, const QString& id, ESliceOrientation orientation)
+StudySliceViewer2D::StudySliceViewer2D(QVTKOpenGLStereoWidget* widget, const QString& id, ESliceOrientation orientation)
 	: ImageSliceViewer2D(widget, id, orientation)
 {
 	this->setStudy(Q_NULLPTR);

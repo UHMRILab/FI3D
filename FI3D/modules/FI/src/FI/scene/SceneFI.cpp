@@ -31,7 +31,7 @@ inline vtkSmartPointer<vtkMatrix4x4> parseTransform(QJsonArray& transformJson) {
 	return mat;
 }
 
-SceneFI::SceneFI(DataCachePtr cache, QVTKOpenGLWidget* widget, const QString& id)
+SceneFI::SceneFI(DataCachePtr cache, QVTKOpenGLStereoWidget* widget, const QString& id)
 	: InteractiveScene(widget, id),
 	mSubscribedSceneID(""),
 	mCache(cache)

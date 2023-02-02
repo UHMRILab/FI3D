@@ -75,7 +75,7 @@ void StudySelectorDialog::onCellDoubleClick(const int& row,
 {
 	QTableWidgetItem* dataID = mGUI->studyList_table->item(row, 0);
 	QTableWidgetItem* studyID = mGUI->studyList_table->item(row, 1);
-	mSelectedStudyID = DataID(dataID->text(), studyID->text());
+	mSelectedStudyID = DataID(QUuid(dataID->text()), studyID->text());
 	this->close();
 }
 
@@ -84,7 +84,7 @@ void StudySelectorDialog::onOKClick() {
 	if (currentRow != -1) {
 		QTableWidgetItem* dataID = mGUI->studyList_table->item(currentRow, 0);
 		QTableWidgetItem* studyID = mGUI->studyList_table->item(currentRow, 1);
-		mSelectedStudyID = DataID(dataID->text(), studyID->text());
+		mSelectedStudyID = DataID(QUuid(dataID->text()), studyID->text());
 	}
 	this->close();
 }

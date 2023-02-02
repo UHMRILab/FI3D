@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="9,2">
     <item>
-     <widget class="QVTKOpenGLWidget" name="Frame3D">
+     <widget class="QVTKOpenGLStereoWidget" name="Frame3D">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -239,7 +239,7 @@
      <x>0</x>
      <y>0</y>
      <width>1521</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
@@ -267,9 +267,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QVTKOpenGLWidget</class>
+   <class>QVTKOpenGLStereoWidget</class>
    <extends>QOpenGLWidget</extends>
-   <header>qvtkopenglwidget.h</header>
+   <header>QVTKOpenGLStereoWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

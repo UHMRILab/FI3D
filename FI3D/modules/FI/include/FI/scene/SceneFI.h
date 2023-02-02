@@ -30,7 +30,7 @@ private:
 
 public:
 	/// @brief Constructor.
-	SceneFI(DataCachePtr cache, QVTKOpenGLWidget* widget, const QString& id = "");
+	SceneFI(DataCachePtr cache, QVTKOpenGLStereoWidget* widget, const QString& id = "");
 
 	/// @brief Destructor.
 	~SceneFI();

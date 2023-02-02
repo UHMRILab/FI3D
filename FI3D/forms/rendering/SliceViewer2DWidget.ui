@@ -200,7 +200,7 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QVTKOpenGLWidget" name="Frame2D">
+      <widget class="QVTKOpenGLStereoWidget" name="Frame2D">
        <property name="font">
         <font>
          <pointsize>12</pointsize>
@@ -330,9 +330,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>QVTKOpenGLWidget</class>
+   <class>QVTKOpenGLStereoWidget</class>
    <extends>QOpenGLWidget</extends>
-   <header>QVTKOpenGLWidget.h</header>
+   <header>QVTKOpenGLStereoWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

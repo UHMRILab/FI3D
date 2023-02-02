@@ -248,7 +248,7 @@ StudyPtr StudyAlgorithms::loadBrainStudyFromText_DEBUG(const QString & filePath)
 
 	while (!file.atEnd()) {
 		QString line = file.readLine();
-		line.trimmed();
+		line = line.trimmed();
 		QList<QString> values = line.split(",");
 
 		if (values.count() != 4) {

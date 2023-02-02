@@ -55,7 +55,7 @@ void DataMessageEncoder::parseRequest(const QJsonObject& request, const QString&
 void DataMessageEncoder::parseImageDataRequest(const QJsonObject& request, const QString& clientID) {
 	qDebug() << "Enter";
 
-	DataID dataID(request.value(DATA_ID).toString());
+	DataID dataID(QUuid(request.value(DATA_ID).toString()));
 	int sliceIndex = request.value(SLICE_INDEX).toInt();
 	ESliceOrientation orientation = request.value(SLICE_ORIENTATION).toInt();
 
@@ -101,7 +101,7 @@ void DataMessageEncoder::parseImageDataRequest(const QJsonObject& request, const
 void DataMessageEncoder::parseStudyDataRequest(const QJsonObject& request, const QString& clientID) {
 	qDebug() << "Enter";
 
-	DataID dataID(request.value(DATA_ID).toString());
+	DataID dataID(QUuid(request.value(DATA_ID).toString()));
 	int sliceIndex = request.value(SLICE_INDEX).toInt();
 	ESliceOrientation orientation = request.value(SLICE_ORIENTATION).toInt();
 	int seriesIndex = request.value(SERIES_INDEX).toInt();
@@ -147,7 +147,7 @@ void DataMessageEncoder::parseStudyDataRequest(const QJsonObject& request, const
 void DataMessageEncoder::parseModelDataRequest(const QJsonObject& request, const QString& clientID) {
 	qDebug() << "Enter";
 
-	DataID dataID(request.value("DataID").toString());
+	DataID dataID(QUuid(request.value("DataID").toString()));
 	RegisteredModelPtr regModel = mDataManager->mRegisteredModels.value(dataID);
 	if (regModel.isNull()) {
 		QJsonObject response;

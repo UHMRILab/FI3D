@@ -12,7 +12,7 @@
 #include <fi3d/modules/ModuleElement.h>
 
 #include <QMainWindow>
-#include <QVTKOpenGLWidget.h>
+#include <QVTKOpenGLStereoWidget.h>
 
 namespace fi3d {
 /// @brief Forward declare the IFeedbackEmitter interface.

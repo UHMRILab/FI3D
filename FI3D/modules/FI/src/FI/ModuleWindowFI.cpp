@@ -66,7 +66,7 @@ ModuleWindowFI::ModuleWindowFI()
 
 ModuleWindowFI::~ModuleWindowFI() {}
 
-QVTKOpenGLWidget* ModuleWindowFI::getSceneWidget() {
+QVTKOpenGLStereoWidget* ModuleWindowFI::getSceneWidget() {
 	return mGUI->Frame3D;
 }
 

@@ -44,7 +44,7 @@ public:
 	~ModuleWindowFI();
 
 	/// @brief Gets the OpenGL widget where the main scene is rendered.
-	QVTKOpenGLWidget* getSceneWidget();
+	QVTKOpenGLStereoWidget* getSceneWidget();
 
 	/// @brief Handles the settings button being clicked.
 	void onSettings();

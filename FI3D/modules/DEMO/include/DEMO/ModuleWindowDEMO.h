@@ -35,7 +35,7 @@ public:
 	~ModuleWindowDEMO();
 
 	/// @brief Gets the OpenGL widget where the main scene is rendered.
-	QVTKOpenGLWidget* getSceneWidget();
+	QVTKOpenGLStereoWidget* getSceneWidget();
 
 private:
 	/*!

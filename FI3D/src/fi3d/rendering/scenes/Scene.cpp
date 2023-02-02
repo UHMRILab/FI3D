@@ -2,7 +2,7 @@
 
 #include <fi3d/logger/Logger.h>
 
-#include <QVTKOpenGLWidget.h>
+#include <QVTKOpenGLStereoWidget.h>
 #include <QVTKInteractor.h>
 #include <QTimer>
 #include <QTime>
@@ -16,7 +16,7 @@
 
 using namespace fi3d;
 
-Scene::Scene(QVTKOpenGLWidget* widget, const QString& id)
+Scene::Scene(QVTKOpenGLStereoWidget* widget, const QString& id)
 	: QObject(Q_NULLPTR),
 	ModuleElement(),
 	mSceneID(id),
@@ -36,7 +36,7 @@ Scene::Scene(QVTKOpenGLWidget* widget, const QString& id)
 {
 	mRenderWindow->AddRenderer(mRenderer);
 	mRenderWindow->SetInteractor(mInteractor);
-	mWidget->SetRenderWindow(mRenderWindow);
+	mWidget->setRenderWindow(mRenderWindow);
 	mInteractor->SetInteractorStyle(mInteractorStyle);
 	mInteractor->Initialize();
 

@@ -29,7 +29,7 @@ ModuleWindowDEMO::ModuleWindowDEMO()
 
 ModuleWindowDEMO::~ModuleWindowDEMO() {}
 
-QVTKOpenGLWidget* ModuleWindowDEMO::getSceneWidget() {
+QVTKOpenGLStereoWidget* ModuleWindowDEMO::getSceneWidget() {
 	return mGUI->Frame3D;
 }
 
