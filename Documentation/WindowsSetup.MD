@@ -65,7 +65,7 @@ The following instructions are under the assumption you are using Visual Studio 
     * Name: msvc2017_64, Path: `(Qt install path)\5.14.2\msvc_2017_64`
     * If it's not listed, click add, and put those values.
 
-## VTK_v8.2.0
+## VTK_v9.2.5
 
 Download VTK source code from [here](https://www.vtk.org/download/). Then, follow these steps:
 
@@ -79,12 +79,19 @@ Download VTK source code from [here](https://www.vtk.org/download/). Then, follo
 * Click `Configure`
   * select your version of VS with x64
   * For VS2019, type `v141` in the `Optional toolset` option
-* Check the options `VTK_Group_Qt` and `VTK_Group_Imaging`
-* Set the `CMAKE_INSTALL_PREFIX` to the location where VTK should be installed
-* Click `Configure` again
-* If CMake failed to find Qt
-  * Set `Qt5Dir` to where you installed Qt: `(Qt5 Install Path)\5.14.1\msvc2017_64\lib\cmake\Qt5`
+* Set `VTK_GROUP_ENABLE_Qt` to `WANT`
+* Set `VTK_GROUP_ENABLE_Imaging` to `WANT`
+* Click `Configure`
+  * if CMake failed to find Qt, set `Qt5Dir` to where you installed Qt
+    * Example: `(Qt5 Install Path)\5.14.1\msvc2017_64\lib\cmake\Qt5`
   * Click `Configure`
+* Check the `Advanced` option
+* Search for `vtkDICOM`
+* Set `VTK_MODULE_ENABLE_VTK_vtkDICOM` to `WANT`
+* Set the `CMAKE_INSTALL_PREFIX` to the location where VTK should be installed
+  * Example: `C:/Program Files/VTK`
+  * Note, if you choose `Program Files` as installation directory, create the `VTK` directory first or you'll need to run VS2019 as admin to install it properly.
+* Click `Configure` again
 * Click `Generate`
 * Click `Open Project`, this will open the VS project
 * Select the `Release` configuration
@@ -92,6 +99,7 @@ Download VTK source code from [here](https://www.vtk.org/download/). Then, follo
 * Click `Build`, wait for it to finish
 * Right click on the `INSTALL`
 * Click `Build`, wait for it to finish
+  * If this step fails, you may need to reun Visual Studio with admin rights.
 * Add VTK to the path
   * Open System (windows key + Pause/Break)
   * Click Advanced System Settings (on left panel)
@@ -104,30 +112,9 @@ Download VTK source code from [here](https://www.vtk.org/download/). Then, follo
   * Click OK
 
 ## vtkDICOM
+<b>Note</b>: Leaving this here for documentation. We used to build this library from scrach and include it. However, we now include it as part of the VTK installation (as shown in the prervious steps with the vtkDICOM module).
 
-Clone the source code from [here](https://github.com/dgobbi/vtk-dicom). Then, follow these steps:
-
-* Open CMake
-* Click `Browse Source` and select the cloned directory
-* Click `Browse Build`
-  * Go to the same cloned directory
-  * Create a new folder called `build`
-  * Select the `build` folder
-* Click `Configure`
-* Select your version of VS with x64
-* For VS2019, type "v141" in the "Optional toolset" option
-* If CMake fails to find VTK
-  * Set the directory to: `(VTK Install Path)/lib/cmake/vtk-8.2`
-* Select `BUILD_SHARED_LIBRARIES`
-* Click `Configure`
-* Click `Generate`
-* Click `Open Project`, this will open the VS project
-* Select the `Release` configuration
-* Right click on the `ALL_BUILD` solution
-* Click `Build`, wait for it to finish
-* Select the `RelWithDebInfo` configuration
-* Right click on the `ALL_BUILD` solution
-* Click `Build`, wait for it to finish
+Repository for module can be found [here](https://github.com/dgobbi/vtk-dicom).
 
 ## CUDA_v10.0 - OPTIONAL
 
@@ -146,9 +133,8 @@ To setup FI3D, do the following:
 * Click `Configure`
 * If Qt DIRs not found
   * Locate the dir in `<Qt Install path>/5.14.2/msvc2017_64/lib/cmake/<QtComponent>`
-* If DICOM_DIR is not found
-  * Select the vtkDICOM library build directory you made in the [vtkDICOM instructions](#vtkDICOM_Dec23-2018)
-  * Click `Configure`
+* Select any component to include in the build
+  * Components are identified by their variable options `Component_*_ENABLE`
 * Select any module to include in the build
   * Modules are identified by their variable options `Module_*_ENABLE`
 * Click `Configure`

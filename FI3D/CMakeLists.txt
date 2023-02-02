@@ -69,13 +69,6 @@ set(VTK_DIR $ENV{VTK_DIR})
 find_package(VTK REQUIRED)
 include(${VTK_USE_FILE})
 
-#=================== INCLUSION OF VTK DICOM ====================#
-find_package(DICOM REQUIRED)
-if(DICOM_FOUND)
-include(${DICOM_USE_FILE})
-endif()
-set(VTK_DICOM_LIBRARIES vtkDICOM)
-
 #=================== INCLUSION OF FI3D ====================#
 set(FI3D_FORMS_DIR "${CMAKE_SOURCE_DIR}/forms")
 set(FI3D_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include")
@@ -164,15 +157,6 @@ target_link_libraries( FI3D Qt5::Xml)
 target_link_libraries( FI3D Qt5::Widgets)
 target_link_libraries( FI3D ${QT_LIBRARIES} ${OPENGL_LIBRARIES})
 target_link_libraries( FI3D ${VTK_LIBRARIES})
-target_link_libraries( FI3D ${VTK_DICOM_LIBRARIES})
-
-# Copy the vtkDICOM DLL to the build directory on Windows
-if (WIN32)
-    add_custom_command(TARGET FI3D POST_BUILD
-        COMMAND "${CMAKE_COMMAND}" -E copy_if_different 
-        "${DICOM_DIR}/bin/$<CONFIG>/vtkDICOM-${VTK_VERSION_MAJOR}.${VTK_VERSION_MINOR}.${VTK_BUILD_VERSION}.dll" 
-        "${CMAKE_BINARY_DIR}/$<CONFIG>/")
-endif()
 
 if (BUILD_AS_DEPLOY)
     # Copy VTK required DLLs.
@@ -245,5 +229,4 @@ if (BUILD_SHARED_LIB)
     target_link_libraries( FI3D_LIB Qt5::Widgets)
     target_link_libraries( FI3D_LIB ${QT_LIBRARIES} ${OPENGL_LIBRARIES})
     target_link_libraries( FI3D_LIB ${VTK_LIBRARIES})
-    target_link_libraries( FI3D_LIB ${VTK_DICOM_LIBRARIES})
 endif()
