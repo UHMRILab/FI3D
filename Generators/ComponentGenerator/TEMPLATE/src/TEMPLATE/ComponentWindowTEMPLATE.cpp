@@ -1,18 +1,20 @@
-#include <TEMPLATE/ModuleWindowTEMPLATE.h>
+#include <TEMPLATE/ComponentWindowTEMPLATE.h>
 
-#include "ui_ModuleWindowTEMPLATE.h"
+#include "ui_ComponentWindowTEMPLATE.h"
 
 using namespace template;
 
-ModuleWindowTEMPLATE::ModuleWindowTEMPLATE()
-	: ModuleWindow(),
-	mGUI(new Ui::ModuleWindowTEMPLATE)
+// @todo: Needing more fixes for this omnicon file.
+
+ComponentWindowTEMPLATE::ComponentWindowTEMPLATE()
+	: ComponentWindow(),
+	mGUI(new Ui::ComponentWindowTEMPLATE)
 {
 	mGUI->setupUi(this);
 }
 
-ModuleWindowTEMPLATE::~ModuleWindowTEMPLATE() {}
+ComponentWindowTEMPLATE::~ComponentWindowTEMPLATE() {}
 
-QVTKOpenGLWidget* ModuleWindowTEMPLATE::getSceneWidget() {
+QVTKOpenGLWidget* ComponentWindowTEMPLATE::getSceneWidget() {
 	return mGUI->Frame3D;
 }

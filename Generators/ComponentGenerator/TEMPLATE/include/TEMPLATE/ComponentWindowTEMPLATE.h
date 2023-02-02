@@ -1,16 +1,18 @@
 #pragma once
 /*!
 * @author	AUTHOR
-* @file		ModuleWindowTEMPLATE.h
-* @class	template::ModuleWindowTEMPLATE
-* @brief	GUI for the MODULE-NAME (TEMPLATE) module.
+* @file		ComponentWindowTEMPLATE.h
+* @class	template::ComponentWindowTEMPLATE
+* @brief	GUI for the COMPONENT-NAME (TEMPLATE) component.
 */
 
-#include <fi3d/modules/ModuleWindow.h>
+// @todo: Needing more fixes for this template file.
+
+#include <fi3d/components/ComponentWindow.h>
 
 /// @brief Forward declare the GUI class.
-namespace Ui {
-class ModuleWindowTEMPLATE;
+namespace ui {
+class ComponentWindowTEMPLATE;
 }
 
 #pragma warning(push)
@@ -19,21 +21,21 @@ class ModuleWindowTEMPLATE;
 // Interfaces. There is no negative side effect from this, thus turning off 
 // the warning here.
 namespace template {
-class ModuleWindowTEMPLATE : public fi3d::ModuleWindow
+class ComponentWindowTEMPLATE : public fi3d::ComponentWindow
 {
 
 	Q_OBJECT
 
 private:
 	/// @brief The UI elements.
-	Ui::ModuleWindowTEMPLATE* mGUI;
+	Ui::ComponentWindowTEMPLATE* mGUI;
 
 public:
 	/// @brief Constructor.
-	ModuleWindowTEMPLATE();
+	ComponentWindowTEMPLATE();
 
 	/// @brief Destructor.
-	~ModuleWindowTEMPLATE();
+	~ComponentWindowTEMPLATE();
 
 	/// @brief Gets the OpenGL widget where the main scene is rendered.
 	QVTKOpenGLWidget* getSceneWidget();
@@ -41,7 +43,7 @@ public:
 };
 
 /// @brief Alias for a smart pointer of this class.
-using ModuleWindowTEMPLATEPtr = QSharedPointer<ModuleWindowTEMPLATE>;
+using ComponentWindowTEMPLATEPtr = QSharedPointer<ComponentWindowTEMPLATE>;
 
 }
 #pragma warning(pop)	// End PUSH

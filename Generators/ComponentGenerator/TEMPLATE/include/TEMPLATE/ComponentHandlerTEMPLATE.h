@@ -1,41 +1,43 @@
 #pragma once
 /*!
 * @author	AUTHOR
-* @file		ModuleHandlerTEMPLATE.h
-* @class	template::ModuleHandlerTEMPLATE
-* @brief	Handles the MODULE-NAME (TEMPLATE) module.
+* @file		ComponentHandlerTEMPLATE.h
+* @class	template::ComponentHandlerTEMPLATE
+* @brief	Handles the COMPONENT-NAME (TEMPLATE) component.
 *
-* TODO: Add information on what this module does.
+* TODO: Add information on what this component does.
 */
 
-#include <fi3d/modules/ModuleHandler.h>
+// @todo: Needing more fixes for this template file.
 
-#include <fi3d/modules/ModuleRegistration.h>
+#include <fi3d/components/ComponentHandler.h>
 
-#include <TEMPLATE/ModuleWindowTEMPLATE.h>
+#include <fi3d/components/ComponentRegistration.h>
+
+#include <TEMPLATE/ComponentWindowTEMPLATE.h>
 
 namespace template {
-class ModuleHandlerTEMPLATE : public fi3d::ModuleHandler {
+class ComponentHandlerTEMPLATE : public fi3d::ComponentHandler {
 
 	Q_OBJECT
-	FI3D_MODULE
+	FI3D_COMPONENT
 
 private:
-	/// @brief The module's GUI.
-	ModuleWindowTEMPLATEPtr mGUI;
+	/// @brief The component's GUI.
+	ComponentWindowTEMPLATEPtr mGUI;
 
 public:
 	/// @brief Constructor.
-	ModuleHandlerTEMPLATE(const QString& moduleID);
+	ComponentHandlerTEMPLATE(const QString& componentID);
 
 	/// @brief Destructor.
-	~ModuleHandlerTEMPLATE();
+	~ComponentHandlerTEMPLATE();
 
 private:
 	/// @brief Set up all the interactions.
 	void setUpInteractions();
 
-	/// @brief Set up all connections between the module elements.
+	/// @brief Set up all connections between the component elements.
 	void setUpConnections();
 
 protected slots:
@@ -47,6 +49,6 @@ protected slots:
 };
 
 /// @brief Alias for a smart pointer of this class.
-using ModuleHandlerTEMPLATEPtr = QSharedPointer<ModuleHandlerTEMPLATE>;
+using ComponentHandlerTEMPLATEPtr = QSharedPointer<ComponentHandlerTEMPLATE>;
 
 }

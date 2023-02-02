@@ -1,8 +1,10 @@
 #include <TEMPLATE/GlobalsTEMPLATE.h>
 
-// TODO: Define the module interaction IDs
+// @todo: Needing more fixes for this omnicon file.
+
+// TODO: Define the component interaction IDs
 // Example:
-// const QString template::MI_INTERACTION_ID = "Interaction ID";
+// const QString template::CI_INTERACTION_ID = "Interaction ID";
 
 // TODO: Define the visual IDs
 // Example:
