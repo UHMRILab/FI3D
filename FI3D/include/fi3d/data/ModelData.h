@@ -20,12 +20,6 @@ public:
 	static ModelData* New();
 	vtkTypeMacro(ModelData, vtkPolyData)
 
-	/*! @brief Constructor. */
-	ModelData();
-
-	/*! @brief Destructor. */
-	~ModelData();
-
 	/// @brief Return the right data type.
 	EData getDataType() const override;
 
@@ -61,6 +55,17 @@ public:
 	 */
 	static vtkSmartPointer<ModelData> createSphere(const double& radius,
 		double(&p)[3], const int& resolution = 50);
+
+protected:
+	/*! @brief Constructor. */
+	ModelData();
+
+	/*! @brief Destructor. */
+	~ModelData() override = default;
+
+private:
+	ModelData(const ModelData&) = delete;
+	void operator=(const ModelData&) = delete;
 };
 
 /// @brief Alias for a smart pointer of this class.

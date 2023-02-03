@@ -19,14 +19,19 @@ public:
 	static CachedModel* New();
 	vtkTypeMacro(CachedModel, fi3d::ModelData)
 
+	/// @brief Deletes the underlying polygon mesh.
+	virtual void release() override;
+
+protected:
 	/// @brief Constructor
 	CachedModel();
 
 	/// @brief Destructor.
-	~CachedModel();
+	~CachedModel() = default;
 
-	/// @brief Deletes the underlying polygon mesh.
-	virtual void release() override;
+private:
+	CachedModel(const CachedModel&) = delete;
+	void operator=(const CachedModel&) = delete;
 };
 
 /// @brief Alias for a smart pointer of this class.

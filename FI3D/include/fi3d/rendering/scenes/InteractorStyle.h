@@ -95,12 +95,6 @@ public:
 	static InteractorStyle* New();
     vtkTypeMacro(InteractorStyle, vtkInteractorStyleTrackballCamera)
 
-	/// @brief Constructor.
-	InteractorStyle();
-
-	/// @brief Destructor.
-	~InteractorStyle();
-
 	/// @brief Set the scene this InteractorStyle pertains to.
 	virtual void setScene(InteractiveScene* scene);
 
@@ -160,6 +154,18 @@ signals:
     void feedbackGlobal(const QString& text) override;
     void feedbackColor(const QString& text, const Qt::GlobalColor& color) override;
 	/// @}
+
+protected:
+	/// @brief Constructor.
+	InteractorStyle();
+
+	/// @brief Destructor.
+	~InteractorStyle() = default;
+
+private:
+	InteractorStyle(const InteractorStyle&) = delete;
+	void operator=(const InteractorStyle&) = delete;
+
 };
 
 /// @brief Alias for a smart pointer of this class.

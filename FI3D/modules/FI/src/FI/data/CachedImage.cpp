@@ -16,8 +16,6 @@ CachedImage::CachedImage()
 	mCoronalSlices()
 {}
 
-CachedImage::~CachedImage() {}
-
 void CachedImage::release() {
 	// TODO: Release the 3D data array.
 }

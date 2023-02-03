@@ -8,8 +8,6 @@ vtkStandardNewMacro(CachedModel)
 
 CachedModel::CachedModel() {}
 
-CachedModel::~CachedModel() {}
-
 void CachedModel::release() {
 	// TODO: Release the memory taken by the underlying polygon mesh.
 }

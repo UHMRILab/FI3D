@@ -12,7 +12,7 @@ sudo apt-get install libxt-dev          // This installs some dependency called 
 ```
 <b>Note:</b> Deployable version for Linux is currently non-functional. Deplyable feature is only functional on Windows.
 
-### Qt v5.14.2
+### Qt 6.4.2
 
 To install Qt, follow these steps:
 
@@ -24,16 +24,17 @@ To install Qt, follow these steps:
   * Selecting components
     * Select Archive and LTS from the left pane
     * Click Refresh
-    * Under Qt -> Qt 5.14.1
+    * Under Qt -> Qt 6.4.2
       * Select gcc 64 bit.
       * Select the following as well
-        * Qt Charts
-        * Qt Data Visualization
-        * Qt Purchasing
-        * Qt Virtual Keyboard
-        * Qt WebEngine
-        * Qt Network Authorization
-        * Qt WebGL Streaming Plugin
+        * Sources
+        * Qt Quick 3D
+        * Qt 5 Compatibility Module
+        * Qt Shader Tools
+        * Qt Debug Information Files
+        * Qt Quick Timeline
+        * Additional Libraries
+          * This shoud include them all
     * Under `Developer and Designer Tools`
       * Select `OpenSSL 1.1.1j Toolkit`
       * <b>Note:</b> OpenSSL features have not been tested on Linux.
@@ -94,7 +95,7 @@ To setup FI3D, do the following:
   * Select the `build` folder
 * Click `Configure`
 * If Qt DIRs not found
-  * Locate the dir in `<Qt Install path>/5.14.2/msvc2017_64/lib/cmake/<QtComponent>`
+  * Locate the dir in `<Qt Install path>/6.4.2/gcc_64/lib/cmake/<QtComponent>`
 * Set `CMAKE_BUILD_TYPE` to `Release`
 * Select any component to include in the build
   * Components are identified by their variable options `Component_*_ENABLE`
@@ -108,7 +109,7 @@ To setup FI3D, do the following:
 To run FI3D, open a terminal in the build directory and do the following:
 
 ``` Shell
-LD_LIBRARY_PATH=/usr/local/lib:<Directory where Qt was installed>/5.14.2/gcc_64/lib
+LD_LIBRARY_PATH=/usr/local/lib:<Directory where Qt was installed>/6.4.2/gcc_64/lib
 export LD_LIBRARY_PATH
 ./FI3D
 ```

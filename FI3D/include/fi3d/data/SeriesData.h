@@ -35,12 +35,6 @@ public:
 	static SeriesData* New();
 	vtkTypeMacro(SeriesData, ImageData)
 
-	/// @brief Constructor.
-	SeriesData();
-
-	/// @brief Destructor.
-	~SeriesData();
-
 	/// @brief Return the right data type.
 	EData getDataType() const override;
 
@@ -63,6 +57,17 @@ public:
 
 	/// @brief Gets the meta-data object.
 	vtkSmartPointer<vtkDICOMMetaData> getMetaData();
+
+protected:
+	/// @brief Constructor.
+	SeriesData();
+
+	/// @brief Destructor.
+	~SeriesData() override = default;
+
+private:
+	SeriesData(const SeriesData&) = delete;
+	void operator=(const SeriesData&) = delete;
 };
 
 /// @brief Alias for a smart pointer of this class.

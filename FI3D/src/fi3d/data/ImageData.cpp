@@ -11,9 +11,6 @@ ImageData::ImageData()
 {
 }
 
-ImageData::~ImageData() {
-}
-
 EData ImageData::getDataType() const {
 	return EData::IMAGE;
 }

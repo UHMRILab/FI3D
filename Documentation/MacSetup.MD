@@ -1,8 +1,8 @@
 # Mac FI3D Development Setup
 
-<b>Note:</b> Deployable version for Mac is currently non-functional. Deplyable feature is only functional on Windows.
+<b>Note:</b> Deployable version for Mac is currently non-functional. Deployable feature is only functional on Windows.
 
-## Qt v5.14.2
+## Qt v6.4.2
 
 * [Download Qt unified setup](https://www.qt.io/download)
 * run it
@@ -12,16 +12,17 @@
   * Selecting components
     * Select Archive and LTS from the left pane
     * Click Refresh
-    * Under Qt -> Qt 5.14.1
+    * Under Qt -> Qt 6.4.2
       * Select gcc 64 bit.
       * Select the following as well
-        * Qt Charts
-        * Qt Data Visualization
-        * Qt Purchasing
-        * Qt Virtual Keyboard
-        * Qt WebEngine
-        * Qt Network Authorization
-        * Qt WebGL Streaming Plugin
+        * Sources
+        * Qt Quick 3D
+        * Qt 5 Compatibility Module
+        * Qt Shader Tools
+        * Qt Debug Information Files
+        * Qt Quick Timeline
+        * Additional Libraries
+          * This shoud include them all
     * Under `Developer and Designer Tools`
       * Select `OpenSSL 1.1.1j Toolkit`
       * <b>Note:</b> OpenSSL features have not been tested on Mac.
@@ -30,7 +31,7 @@
   * click next
   * click install
 
-## VTK_v8.2.0
+## VTK_v9.2.5
 
 Download VTK source code from [here](https://www.vtk.org/download/). Then, follow these steps:
 
@@ -69,7 +70,7 @@ Repository for module can be found [here](https://github.com/dgobbi/vtk-dicom).
 
 The project can be enabled with CUDA. However, at the moment it is not being used for anything. Skip this installation until further instructions.
 
-## Setting up FID3D
+## Setting up FI3D
 
 <b>Note: </b> If you don't want to use QtCreator, try the [Linux instructions](LinuxSetup.MD) instead (untested).
 

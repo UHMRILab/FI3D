@@ -31,8 +31,6 @@ InteractorStyle::InteractorStyle()
 	mCellPicker->SetTolerance(0.001);
 }
 
-InteractorStyle::~InteractorStyle() {}
-
 void InteractorStyle::setScene(InteractiveScene* scene) {
 	if (mScene != Q_NULLPTR) {
 		QObject::disconnect(

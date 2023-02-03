@@ -2,11 +2,11 @@
 
 ## Visual Studio 2017/2019
 
-The following instructions are under the assumption you are using Visual Studio 2017/2019/2022. If using VS2019/2022, ensure the C++ v141 toolset is installed with it.
+The following instructions are under the assumption you are using Visual Studio 2019/2022. If using 2022, ensure the C++ v142 toolset is installed with it.
 
-## Qt v5.14.2
+## Qt v6.4.2
 
-<b>Note: </b>Follow these exact steps even if you are using Visual Studio 2019/2022. There is no Qt v5.14.2 for VS2019/2022, but its VS2017 version works for VS2019/2022 when using the v141 toolset.
+<b>Note: </b>Follow these exact steps even if you are using Visual Studio 2022. There is no Qt v6.4.2 for VS2022, but its VS2019 version works for VS2022 when using the v142 toolset. If using VS2022, ensure v142 toolset is installed with it and add `v142` in CMake Configure window in the option field when building VTK and the FI3D.
 
 * [Download Qt unified setup](https://www.qt.io/download)
 * run it
@@ -14,16 +14,17 @@ The following instructions are under the assumption you are using Visual Studio 
   * create an account (or login if already have one)
   * Select where to install Qt (remember this directory)
   * Selecting components
-    * Under Qt -> Qt 5.14.2
-      * Select MSVC 2017 64-bit
+    * Under Qt -> Qt 6.4.2
+      * Select MSVC 2019 64-bit
       * Select the following as well
-        * Qt Charts
-        * Qt Data Visualization
-        * Qt Purchasing
-        * Qt Virtual Keyboard
-        * Qt WebEngine
-        * Qt Network Authorization
-        * Qt WebGL Streaming Plugin
+        * Sources
+        * Qt Quick 3D
+        * Qt 5 Compatibility Module
+        * Qt Shader Tools
+        * Qt Debug Information Files
+        * Qt Quick Timeline
+        * Additional Libraries
+          * This shoud include them all  
     * Under `Developer and Designer Tools`
       * Select `OpenSSL 1.1.1j Toolkit`
     * Click next
@@ -34,8 +35,8 @@ The following instructions are under the assumption you are using Visual Studio 
   * Open System (windows key + Pause/Break)
   * Click Advanced System Settings (on left panel)
   * Click Environment Variables
-  * Create a new variable called `QTDIR` with the value: `(Qt install path)\5.14.2\msvc2017_64`
-    * e. g., `F:\Qt\5.14.2\msvc2017_64`
+  * Create a new variable called `QTDIR` with the value: `(Qt install path)\6.4.2\msvc2019_64`
+    * e. g., `F:\Qt\6.4.2\msvc2019_64`
   * Add binaries and library to Path
     * edit the PATH variable
     * Add following Entry: `%QTDIR%\bin`
@@ -60,10 +61,11 @@ The following instructions are under the assumption you are using Visual Studio 
 * Click Modify on new window
 * Open Visual Studio
 * Setup
-  * Qt VS Tools -> Qt Options (top menu bar)
-  * Check that Qt 2017 x64 is added
-    * Name: msvc2017_64, Path: `(Qt install path)\5.14.2\msvc_2017_64`
-    * If it's not listed, click add, and put those values.
+  * Extensions -> Qt VS Tools -> Qt Options (top menu bar)
+  * Click the `+` symbol
+  * Under `Path` click on the folder icon
+  * Navigate and select `(Qt install path)\6.4.2\msvc_2019_64\bin\qmake.exe`
+  * Click OK
 
 ## VTK_v9.2.5
 
@@ -77,13 +79,14 @@ Download VTK source code from [here](https://www.vtk.org/download/). Then, follo
   * Create a new folder called `build`
   * Select the `build` folder
 * Click `Configure`
-  * select your version of VS with x64
-  * For VS2019, type `v141` in the `Optional toolset` option
+  * Select VS2019 with x64 platform
+  * If using VS2022, put `v142` in the `Optional toolset` field
+  * Click `Finish`
 * Set `VTK_GROUP_ENABLE_Qt` to `WANT`
 * Set `VTK_GROUP_ENABLE_Imaging` to `WANT`
 * Click `Configure`
-  * if CMake failed to find Qt, set `Qt5Dir` to where you installed Qt
-    * Example: `(Qt5 Install Path)\5.14.1\msvc2017_64\lib\cmake\Qt5`
+  * if CMake failed to find Qt, set `Qt6Dir` to where you installed Qt
+    * Example: `(Qt6 Install Path)\6.4.2\msvc2019_64\lib\cmake\Qt6`
   * Click `Configure`
 * Check the `Advanced` option
 * Search for `vtkDICOM`
@@ -131,8 +134,11 @@ To setup FI3D, do the following:
   * Create a new folder called `build`
   * Select the `build` folder
 * Click `Configure`
+  * Select VS2019 with x64 platform
+  * If using VS2022, put `v142` in the `Optional toolset` field
+  * Click `Finish`
 * If Qt DIRs not found
-  * Locate the dir in `<Qt Install path>/5.14.2/msvc2017_64/lib/cmake/<QtComponent>`
+  * Locate the dir in `<Qt Install path>/6.4.2/msvc2019_64/lib/cmake/<QtComponent>`
 * Select any component to include in the build
   * Components are identified by their variable options `Component_*_ENABLE`
 * Select any module to include in the build

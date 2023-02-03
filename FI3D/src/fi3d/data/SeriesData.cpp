@@ -14,9 +14,6 @@ SeriesData::SeriesData()
 {
 }
 
-SeriesData::~SeriesData() {
-}
-
 EData SeriesData::getDataType() const {
 	return EData::SERIES;
 }

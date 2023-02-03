@@ -22,12 +22,6 @@ public:
 	static ImageData* New();
 	vtkTypeMacro(ImageData, vtkImageData)
 
-	/*! @brief Constructor. */
-	ImageData();
-
-	/*! @brief Destructor. */
-	~ImageData();
-
 	/// @brief Return the right data type.
 	EData getDataType() const override;
 
@@ -46,6 +40,17 @@ public:
 		const int& dimX, const int& dimY, const int& dimZ,
 		const double& spaceX, const double& spaceY, const double spaceZ,
 		int type = VTK_UNSIGNED_CHAR);
+
+protected:
+	/*! @brief Constructor. */
+	ImageData();
+
+	/*! @brief Destructor. */
+	~ImageData() override = default;
+
+private:
+	ImageData(const ImageData&) = delete;
+	void operator=(const ImageData&) = delete;
 };
 
 /// @brief Alias for a smart pointer of this class.

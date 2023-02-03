@@ -36,17 +36,22 @@ public:
 	static CachedImage* New();
 	vtkTypeMacro(CachedImage, fi3d::ImageData)
 
-	/// @brief Constructor.
-	CachedImage();
-
-	/// @brief Destructor.
-	~CachedImage();
-
 	/// @brief Deletes the underlying 3D array.
 	virtual void release() override;
 
 	/// @brief Checks whether the slice is cached.
 	bool isSliceCached(const int& index, const fi3d::ESliceOrientation& orientation);
+
+protected:
+	/// @brief Constructor.
+	CachedImage();
+
+	/// @brief Destructor.
+	~CachedImage() = default;
+
+private:
+	CachedImage(const CachedImage&) = delete;
+	void operator=(const CachedImage&) = delete;
 };
 
 /// @brief Alias for a smart pointer of this class.

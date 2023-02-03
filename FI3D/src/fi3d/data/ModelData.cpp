@@ -16,8 +16,6 @@ ModelData::ModelData()
 {
 }
 
-ModelData::~ModelData() {}
-
 EData ModelData::getDataType() const {
 	return EData::MODEL;
 }
