@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.12)
 
 #======================= Find subdirectories in directory =======================#
 # Obtained from: https://stackoverflow.com/questions/7787823/cmake-how-to-get-the-name-of-all-subdirectories-of-a-directory
@@ -93,10 +93,14 @@ if (CUDA_ENABLE)
 endif()
 
 #======================= Find and Include Components =======================#
+set(COMPONENT_ACRONYMS)
+set(ENABLED_COMPONENTS)
 SUBDIRLIST(FI3D_COMPONENTS_DIRS ${CMAKE_SOURCE_DIR}/components)
 FOREACH(fi3dComponentDir ${FI3D_COMPONENTS_DIRS})
     if (EXISTS "${CMAKE_SOURCE_DIR}/components/${fi3dComponentDir}/CMakeLists.txt")
         include(${CMAKE_SOURCE_DIR}/components/${fi3dComponentDir}/CMakeLists.txt)
+
+        list(APPEND COMPONENT_ACRONYMS "${fi3dComponentDir}")
     else ()
         message("No CMAKE information found for ${fi3dComponentDir}")
     endif ()
@@ -142,7 +146,7 @@ target_include_directories(FI3D PRIVATE ${FI3D_INCLUDE_DIR})
 target_include_directories(FI3D PRIVATE ${FI3D_SOURCE_DIR})
 
 # Add the component targets
-target_include_directories(FI3D PRIVATE "${FI3D_COMPONENTS_DIRECTORIES}/components")
+target_include_directories(FI3D PRIVATE "${FI3D_COMPONENTS_DIRECTORIES}")
 
 # Add the module targets
 target_include_directories(FI3D PRIVATE ${FI3D_MODULES_DIRECTORIES})
