@@ -94,7 +94,7 @@ inline void createThumbnail(RegisteredStudyPtr regStudy) {
 	}
 }
 
-/************************ FI3D Componenet Members ************************/
+/************************ FI3D Component Members ************************/
 REGISTER_FI3D_COMPONENT_WITH_GUI(DataManager, "Data Manager", "DM")
 
 void DataManager::showDialog() {

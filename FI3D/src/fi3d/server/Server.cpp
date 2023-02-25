@@ -17,7 +17,7 @@
 
 using namespace fi3d;
 
-/************************ FI3D Componenet Members ************************/
+/************************ FI3D Component Members ************************/
 REGISTER_FI3D_COMPONENT_WITH_GUI(Server, "Server", "Server")
 
 void Server::showDialog() {

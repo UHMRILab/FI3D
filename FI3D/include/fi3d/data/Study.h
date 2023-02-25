@@ -65,7 +65,7 @@ public:
 	/// @brief Adds a data set to this study.
 	void addSeries(SeriesDataVPtr data);
 
-	/// @breif Creates a new series and adds it to the study.
+	/// @brief Creates a new series and adds it to the study.
 	SeriesDataVPtr createAndAddSeries();
 
 	/// @brief Removes the series at the given index, returns if
@@ -99,7 +99,7 @@ public:
 	/// @brief Gets the paitnet Name.
 	QString getPatientName() const;
 
-	/// @brie Sets the study's date.
+	/// @brief Sets the study's date.
 	void setStudyDate(const QString& date);
 
 	/// @brief Gets the study's date.

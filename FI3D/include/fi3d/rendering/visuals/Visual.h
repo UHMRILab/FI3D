@@ -93,7 +93,7 @@ public:
 	/// @brief Get whether this Visual is a 3D Visual or not.
 	bool is3D() const;
 
-	/// @breif Get whether this Visual should be sent as a hologram.
+	/// @brief Get whether this Visual should be sent as a hologram.
 	virtual bool isHolographic() const;
 
 	/// @brief Gets the Visual's opacity.

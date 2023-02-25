@@ -42,7 +42,7 @@ public:
 	/*! @brief Constructor for the object. */
 	Subtitle(const QString& visualID, const QString& text = "");
 
-	/*! @breif Destructor. */
+	/*! @brief Destructor. */
 	~Subtitle();
 
 public slots:

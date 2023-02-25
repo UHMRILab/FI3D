@@ -69,7 +69,7 @@ private:
 	/// @brief Gets the password for the server. 
 	static QString getPassword();
 
-	/// @breif Sets the password for the server.
+	/// @brief Sets the password for the server.
 	static void setPassword(const QString& password);
 
 public:

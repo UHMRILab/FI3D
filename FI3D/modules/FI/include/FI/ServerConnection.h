@@ -63,7 +63,7 @@ protected slots:
     void onServerMessage(fi3d::MessagePtr message);
 
 public slots:
-    /// @breif Sends an application request.
+    /// @brief Sends an application request.
     void sendApplicationRequest(QJsonObject& applicationParams, const QString& message = "");
 
     /// @brief Sends a module request.

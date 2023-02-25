@@ -1,6 +1,6 @@
 # Windows FI3D Development Setup
 
-## Visual Studio 2017/2019
+## Visual Studio 2019/2022
 
 The following instructions are under the assumption you are using Visual Studio 2019/2022. If using 2022, ensure the C++ v142 toolset is installed with it.
 

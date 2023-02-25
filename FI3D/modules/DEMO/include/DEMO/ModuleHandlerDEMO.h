@@ -24,13 +24,13 @@ private:
 	/// @brief The module's GUI.
 	ModuleWindowDEMOPtr mGUI;
 
-	/// @breif The rendered Slice.
+	/// @brief The rendered Slice.
 	fi3d::AnimatedStudySlicePtr mSlice;
 
 	/// @brief The epicardium and endocardium.
 	fi3d::AnimatedModelPtr mEndocardium, mEpicardium;
 
-	/// @breif Timer which handles the animation of the renderings. 
+	/// @brief Timer which handles the animation of the renderings. 
 	QSharedPointer<QTimer> mDataAnimationTimer;
 
 	/// @brief The speed, in milliseconds, of the animation.

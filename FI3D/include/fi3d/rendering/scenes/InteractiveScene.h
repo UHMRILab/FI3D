@@ -54,7 +54,7 @@ public:
 	/// @brief Constructor.
 	InteractiveScene(QVTKOpenGLStereoWidget* widget, const QString& id = "");
 
-	/// @breif Destructor.
+	/// @brief Destructor.
 	~InteractiveScene();
 
 public slots:

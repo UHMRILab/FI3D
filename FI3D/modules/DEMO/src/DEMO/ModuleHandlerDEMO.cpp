@@ -42,7 +42,7 @@ ModuleHandlerDEMO::ModuleHandlerDEMO(const QString& moduleID)
 	scene->setAxesVisible(false);
 	this->setScene(scene);
 
-	SubtitlePtr brand = scene->addSubtitle("Brand", "FI3D, MRI Lab, University of Houston, NSF Fundend");
+	SubtitlePtr brand = scene->addSubtitle("Brand", "FI3D, MRI Lab, University of Houston, NSF Funded");
 	brand->setLocationBottomLeft();
 	brand->setColor(1, 1, 0);
 	

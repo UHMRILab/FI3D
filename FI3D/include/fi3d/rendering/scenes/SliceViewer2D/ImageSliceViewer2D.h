@@ -194,7 +194,7 @@ public:
 	fi3d::ImageDataVPtr getImageData();
 
 public slots:
-	/// @breif Set the orientation to Transverse (XY). 
+	/// @brief Set the orientation to Transverse (XY).
 	void setOrientationXY();
 
 	/// @brief Set the orientation to Sagittal (YZ). 

@@ -10,9 +10,9 @@ sudo apt-get install build-essential    // This installs c++ stuff
 sudo apt-get install libgl1-mesa-dev    // This installs OpenGL
 sudo apt-get install libxt-dev          // This installs some dependency called "x11_xt_lib"
 ```
-<b>Note:</b> Deployable version for Linux is currently non-functional. Deplyable feature is only functional on Windows.
+<b>Note:</b> Deployable version for Linux is currently non-functional. Deployable feature is only functional on Windows.
 
-### Qt 6.4.2
+## Qt 6.4.2
 
 To install Qt, follow these steps:
 
@@ -77,7 +77,7 @@ Download VTK source code from [here](https://www.vtk.org/download/). Then, follo
 
 Repository for module can be found [here](https://github.com/dgobbi/vtk-dicom).
 
-### CUDA_v10.0 - OPTIONAL
+## CUDA_v10.0 - OPTIONAL
 
 <b>Note:</b> CUDA has not been tested on Linux.
 
