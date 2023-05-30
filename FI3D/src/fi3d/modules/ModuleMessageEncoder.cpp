@@ -20,7 +20,7 @@ ModuleMessageEncoder::ModuleMessageEncoder()
 	mSceneUpdates()
 {
 	// TODO: What is the optimal value here? Determine proper value.
-	mSubscriberUpdateTimer.setInterval(100);
+	mSubscriberUpdateTimer.setInterval(60);
 
 	QObject::connect(
 		&mSubscriberUpdateTimer, &QTimer::timeout,
@@ -990,10 +990,9 @@ void ModuleMessageEncoder::encodeVisualInfo(Visual3DPtr visual,
 		{
 			QVariantList transformation;
 			transformation.reserve(16);
-			double matrix[16];
-			visual->getTransformData(matrix);
+			vtkMatrix4x4* matrix = visual->getRelativeMatrix();
 			for (int i = 0; i < 16; i++) {
-				transformation.push_back(matrix[i]);
+				transformation.push_back(matrix->GetData()[i]);
 			}
 
 			visualInfo.insert(ID, visual->getVisualID());
