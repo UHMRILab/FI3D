@@ -30,7 +30,7 @@ ModelPtr Assembly::addPart(const QString& partID, ModelDataVPtr data) {
 		return Q_NULLPTR;
 	}
 
-	ModelPtr newPart(new Model(partID));
+	ModelPtr newPart(new Model(partID, data));
 
 	mActor->AddPart(newPart->getActor());
 	this->connectPartSignals(newPart.data());

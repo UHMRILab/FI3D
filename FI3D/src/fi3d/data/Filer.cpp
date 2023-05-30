@@ -198,6 +198,7 @@ void Filer::readModelDataFromSTL(const QString& filePath, vtkSmartPointer<ModelD
 vtkSmartPointer<ModelData> Filer::readModelDataFromSTL(const QString& filePath) {
 	vtkSmartPointer<ModelData> modelData = vtkSmartPointer<ModelData>::New();
 	Filer::readModelDataFromSTL(filePath, modelData);
+	modelData->setDataName(filePath);
 	return modelData;
 }
 
