@@ -69,27 +69,9 @@ const QString fi3d::LINE_INDICES = "LineIndices";
 const QString fi3d::TRIANGLE_INDICES = "TriangleIndices";
 const QString fi3d::PAYLOAD_POINTS_LENGTH = "PayloadPointsLength";
 const QString fi3d::PAYLOAD_TRIANGLES_LENGTH = "PayloadTrianglesLength";
-
-// TODO: Payload texture length, payload texture coordinate length
-const QString fi3d::PAYLOAD_TCOORDS_LENGTH = "PayloadTCoordsLength";
-const QString fi3d::PAYLOAD_TEXTURES_COUNT = "PayloadTexturesCount";
-const QVector<QString> fi3d::PAYLOAD_TEXTURES_LENGTH = 
-						{ "PayloadTextureLength0"
-						, "PayloadTextureLength1"
-						, "PayloadTextureLength2"
-						, "PayloadTextureLength3"
-						, "PayloadTextureLength4" };
-
-const QVector<QString> fi3d::PAYLOAD_TEXTURES_DIMENSION_WIDTH = 
-						{ "PayloadTextureDimensionWidth0"
-						, "PayloadTextureDimensionWidth1"
-						, "PayloadTextureDimensionWidth2"
-						, "PayloadTextureDimensionWidth3"
-						, "PayloadTextureDimensionWidth4" };
-
-const QVector<QString> fi3d::PAYLOAD_TEXTURES_DIMENSION_HEIGHT = 
-						{ "PayloadTextureDimensionHeight0"
-						, "PayloadTextureDimensionHeight1"
-						, "PayloadTextureDimensionHeight2"
-						, "PayloadTextureDimensionHeight3"
-						, "PayloadTextureDimensionHeight4" };
+const QString fi3d::PAYLOAD_TEXTURE_COORDINATES_LENGTH = "PayloadTextureCoordinatesLength";
+const QString fi3d::PAYLOAD_TEXTURE_LENGTH = "PayloadTextureLength";
+const QString fi3d::TEXTURE_NAME = "Textures";
+const QString fi3d::TEXTURE_NAME = "TextureName";
+const QString fi3d::TEXTURE_DIMENSION_U = "DimensionU";
+const QString fi3d::TEXTURE_DIMENSION_V = "DimensionV";

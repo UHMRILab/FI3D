@@ -465,26 +465,20 @@ bool DataMessageEncoder::toMessage(ModelData* data, MessagePtr dataMessage) {
 	modelInfo->insert(DATA_FORMAT, 1);
 	modelInfo->insert(PAYLOAD_POINTS_LENGTH, pointBytes);
 	modelInfo->insert(PAYLOAD_TRIANGLES_LENGTH, triangleBytes);
+	modelInfo->insert(PAYLOAD_TEXTURE_COORDINATES_LENGTH, tcoordBytes);
 
-	// TODO: tcoord length and texture length(s)
-	modelInfo->insert(PAYLOAD_TCOORDS_LENGTH, tcoordBytes);
-
-	modelInfo->insert(PAYLOAD_TEXTURES_COUNT, texturesCount);
-
-	for (int i = 0; i < texturesCount; i++)
-	{
-		modelInfo->insert(PAYLOAD_TEXTURES_LENGTH[i], texturePixelBytes[i]);
+	// Json encode the texture metadata. 
+	QJsonArray texturesJson;
+	for (int i = 0; i < texturesCount; i++) {
+		QJsonObject textureJson;
+		// TODO: How to name these?
+		textureJson.insert(TEXTURE_NAME, tr("Texture: %1").arg(i));
+		textureJson.insert(TEXTURE_DIMENSION_U, textureDimensionWidth[i]);
+		textureJson.insert(TEXTURE_DIMENSION_V, textureDimensionHeight[i]);
+		textureJson.insert(PAYLOAD_TEXTURE_LENGTH, texturePixelBytes[i]);
+		texturesJson.append(textureJson);
 	}
-
-	for (int i = 0; i < texturesCount; i++)
-	{
-		modelInfo->insert(PAYLOAD_TEXTURES_DIMENSION_WIDTH[i], textureDimensionWidth[i]);
-	}
-
-	for (int i = 0; i < texturesCount; i++)
-	{
-		modelInfo->insert(PAYLOAD_TEXTURES_DIMENSION_HEIGHT[i], textureDimensionHeight[i]);
-	}
+	modelInfo->insert(TEXTURES, texturesJson);
 
 	dataMessage->setInfoAndPayload(modelInfo, payload);
 
