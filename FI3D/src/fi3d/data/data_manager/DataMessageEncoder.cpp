@@ -408,39 +408,35 @@ bool DataMessageEncoder::toMessage(ModelData* data, MessagePtr dataMessage) {
 
 	qDebug() << "Number of textures to be sent:" << texturesCount;
 
-	int texturePixelCount[5];
-	int texturePixelBytes[5];
-	int textureDimensionWidth[5];
-	int textureDimensionHeight[5];
-	QByteArray texturePixelsPayload[5];
-	for (int i = 0; i < texturesCount; i++)
-	{
-		textureDimensionWidth[i] = data->getTexture(i)->GetDimensions()[0];
-		textureDimensionHeight[i] = data->getTexture(i)->GetDimensions()[1];
-
-
-		texturePixelCount[i] = textureDimensionWidth[i] * textureDimensionHeight[i];
-		texturePixelBytes[i] = texturePixelCount[i] * 3 * sizeof(float);
-
+	// Json encode the texture metadata. 
+	QJsonArray texturesJson;
+	for (int i = 0; i < texturesCount; i++) {
+		int* dims = data->getTexture(i)->GetDimensions();
+		int texturePayloadLength = dims[0] * dims[1] * 3 * sizeof(float);
 		
-		texturePixelsPayload[i].reserve(texturePixelBytes[i]);
-
-		for (int y = 0; y < textureDimensionHeight[i]; y++)
-		{
-			for (int x = 0; x < textureDimensionWidth[i]; x++)
-			{
+		QByteArray texturePayload;
+		texturePayload.reserve(texturePayloadLength);
+		for (int y = 0; y < dims[1]; y++) {
+			for (int x = 0; x < dims[0]; x++) {
 				//unsigned char* val = static_cast<unsigned char*>(data->getTexture(0)->GetScalarPointer(x, y, 0));
 
-				for (int j = 0; j < 3; j++)
-				{
+				for (int j = 0; j < 3; j++) {
 					float value = data->getTexture(i)->GetScalarComponentAsFloat(x, y, 0, j);
 
 					//qDebug() << "Channel" << j <<  "of texture" << i << ":" << value;
-					texturePixelsPayload[i].append((const char*)&value, sizeof(float));
+					texturePayload.append((const char*)&value, sizeof(float));
 				}
 			}
 		}
-		payload->append(texturePixelsPayload[i]);
+		payload->append(texturePayload);
+
+		QJsonObject textureJson;
+		// TODO: How to name these?
+		textureJson.insert(TEXTURE_NAME, tr("Texture: %1").arg(i));
+		textureJson.insert(TEXTURE_DIMENSION_U, dims[0]);
+		textureJson.insert(TEXTURE_DIMENSION_V, dims[1]);
+		textureJson.insert(PAYLOAD_TEXTURE_LENGTH, texturePayloadLength);
+		texturesJson.append(textureJson);
 	}
 	// END - TODO 2: Add code for converting textures to byte arrays
 	// END - TODO: Add code for converting texture coordinates and textures to byte arrays
@@ -453,8 +449,12 @@ bool DataMessageEncoder::toMessage(ModelData* data, MessagePtr dataMessage) {
 	// TODO: Some debug logs for texture coordinates and textures
 	qDebug() << "TCoord Bytes=" << tcoordBytes;
 	qDebug() << "TCoords=" << tcoordCount;
-	qDebug() << "Texture pixels Bytes=" << (texturePixelBytes[0] + texturePixelBytes[1] + texturePixelBytes[2] + texturePixelBytes[3] + texturePixelBytes[4]);
+	qDebug() << "TextureCount=" << texturesJson.count();
+	for (int i = 0; i < texturesJson.count(); i++) {
+		qDebug() << "Texture Bytes for" + texturesJson[i].toObject()[TEXTURE_NAME].toString() + " = " << 
+			texturesJson[i].toObject()[PAYLOAD_TEXTURE_LENGTH].toInt();
 
+	}
 
 	QSharedPointer<QJsonObject> modelInfo(new QJsonObject());
 	modelInfo->insert(DATA_ID, data->getDataID().toString());
@@ -466,18 +466,6 @@ bool DataMessageEncoder::toMessage(ModelData* data, MessagePtr dataMessage) {
 	modelInfo->insert(PAYLOAD_POINTS_LENGTH, pointBytes);
 	modelInfo->insert(PAYLOAD_TRIANGLES_LENGTH, triangleBytes);
 	modelInfo->insert(PAYLOAD_TEXTURE_COORDINATES_LENGTH, tcoordBytes);
-
-	// Json encode the texture metadata. 
-	QJsonArray texturesJson;
-	for (int i = 0; i < texturesCount; i++) {
-		QJsonObject textureJson;
-		// TODO: How to name these?
-		textureJson.insert(TEXTURE_NAME, tr("Texture: %1").arg(i));
-		textureJson.insert(TEXTURE_DIMENSION_U, textureDimensionWidth[i]);
-		textureJson.insert(TEXTURE_DIMENSION_V, textureDimensionHeight[i]);
-		textureJson.insert(PAYLOAD_TEXTURE_LENGTH, texturePixelBytes[i]);
-		texturesJson.append(textureJson);
-	}
 	modelInfo->insert(TEXTURES, texturesJson);
 
 	dataMessage->setInfoAndPayload(modelInfo, payload);
