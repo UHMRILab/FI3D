@@ -63,3 +63,18 @@ ModelDataVPtr ModelData::createSphere(const double& radius, double(&centerPoint)
 
 	return sphere;
 }
+
+void ModelData::setTexture(vtkIdType id, vtkSmartPointer<vtkImageData> textureImage)
+{
+	mTextures.insert(id, textureImage);
+}
+
+vtkSmartPointer<vtkImageData> ModelData::getTexture(vtkIdType id)
+{
+	return mTextures[id];
+}
+
+int ModelData::getTexturesCount()
+{
+	return mTextures.size();
+}

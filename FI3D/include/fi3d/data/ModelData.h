@@ -9,6 +9,7 @@
 #include <fi3d/data/DataObject.h>
 
 #include <vtkPolyData.h>
+#include <vtkImageData.h>
 
 namespace fi3d {
 class ModelData : public DataObject, public vtkPolyData {
@@ -56,6 +57,12 @@ public:
 	static vtkSmartPointer<ModelData> createSphere(const double& radius,
 		double(&p)[3], const int& resolution = 50);
 
+	void setTexture(vtkIdType id, vtkSmartPointer<vtkImageData> textureImage);
+
+	vtkSmartPointer<vtkImageData> getTexture(vtkIdType id);
+
+	int getTexturesCount();
+
 protected:
 	/*! @brief Constructor. */
 	ModelData();
@@ -66,6 +73,8 @@ protected:
 private:
 	ModelData(const ModelData&) = delete;
 	void operator=(const ModelData&) = delete;
+
+	QVector<vtkSmartPointer<vtkImageData>> mTextures;
 };
 
 /// @brief Alias for a smart pointer of this class.

@@ -9,6 +9,8 @@
 
 #include <QJsonArray>
 
+#include <vtkPointData.h>
+
 using namespace fi3d;
 
 /// @brief Inserts the common values for a response.
@@ -380,9 +382,79 @@ bool DataMessageEncoder::toMessage(ModelData* data, MessagePtr dataMessage) {
 	int triangleBytes = trianglesPayload.count();
 	payload->append(trianglesPayload);
 
+	// TODO: Add code for converting texture coordinates and textures to byte arrays
+	// TODO 1: Add code for converting texture coordinates to byte arrays
+	int tcoordCount = data->GetPointData()->GetTCoords()->GetNumberOfTuples();
+	int tcoordBytes = tcoordCount * 2 * sizeof(float);
+
+	QByteArray tcoordsPayload;
+	tcoordsPayload.reserve(tcoordBytes);
+
+	// for loop for appending to sub-payload
+	for (int i = 0; i < tcoordCount; i++) {
+		double* tcoord = data->GetPointData()->GetTCoords()->GetTuple(i);
+		for (int j = 0; j < 2; j++) {
+			float value = tcoord[j];
+			tcoordsPayload.append((const char*)&value, sizeof(float));
+		}
+	}
+
+	payload->append(tcoordsPayload);
+
+	// END - TODO 1: Add code for converting texture coordinates to byte arrays
+
+	// TODO 2: Add code for converting textures to byte arrays
+	int texturesCount = data->getTexturesCount();
+
+	qDebug() << "Number of textures to be sent:" << texturesCount;
+
+	int texturePixelCount[5];
+	int texturePixelBytes[5];
+	int textureDimensionWidth[5];
+	int textureDimensionHeight[5];
+	QByteArray texturePixelsPayload[5];
+	for (int i = 0; i < texturesCount; i++)
+	{
+		textureDimensionWidth[i] = data->getTexture(i)->GetDimensions()[0];
+		textureDimensionHeight[i] = data->getTexture(i)->GetDimensions()[1];
+
+
+		texturePixelCount[i] = textureDimensionWidth[i] * textureDimensionHeight[i];
+		texturePixelBytes[i] = texturePixelCount[i] * 3 * sizeof(float);
+
+		
+		texturePixelsPayload[i].reserve(texturePixelBytes[i]);
+
+		for (int y = 0; y < textureDimensionHeight[i]; y++)
+		{
+			for (int x = 0; x < textureDimensionWidth[i]; x++)
+			{
+				//unsigned char* val = static_cast<unsigned char*>(data->getTexture(0)->GetScalarPointer(x, y, 0));
+
+				for (int j = 0; j < 3; j++)
+				{
+					float value = data->getTexture(i)->GetScalarComponentAsFloat(x, y, 0, j);
+
+					//qDebug() << "Channel" << j <<  "of texture" << i << ":" << value;
+					texturePixelsPayload[i].append((const char*)&value, sizeof(float));
+				}
+			}
+		}
+		payload->append(texturePixelsPayload[i]);
+	}
+	// END - TODO 2: Add code for converting textures to byte arrays
+	// END - TODO: Add code for converting texture coordinates and textures to byte arrays
+
+
 	qDebug() << "Total bytes=" << payload->count();
 	qDebug() << "Point Bytes=" << pointBytes << "Triangle Bytes=" << triangleBytes;
 	qDebug() << "Points=" << pointCount << "Triangles=" << triangleCount;
+
+	// TODO: Some debug logs for texture coordinates and textures
+	qDebug() << "TCoord Bytes=" << tcoordBytes;
+	qDebug() << "TCoords=" << tcoordCount;
+	qDebug() << "Texture pixels Bytes=" << (texturePixelBytes[0] + texturePixelBytes[1] + texturePixelBytes[2] + texturePixelBytes[3] + texturePixelBytes[4]);
+
 
 	QSharedPointer<QJsonObject> modelInfo(new QJsonObject());
 	modelInfo->insert(DATA_ID, data->getDataID().toString());
@@ -393,6 +465,26 @@ bool DataMessageEncoder::toMessage(ModelData* data, MessagePtr dataMessage) {
 	modelInfo->insert(DATA_FORMAT, 1);
 	modelInfo->insert(PAYLOAD_POINTS_LENGTH, pointBytes);
 	modelInfo->insert(PAYLOAD_TRIANGLES_LENGTH, triangleBytes);
+
+	// TODO: tcoord length and texture length(s)
+	modelInfo->insert(PAYLOAD_TCOORDS_LENGTH, tcoordBytes);
+
+	modelInfo->insert(PAYLOAD_TEXTURES_COUNT, texturesCount);
+
+	for (int i = 0; i < texturesCount; i++)
+	{
+		modelInfo->insert(PAYLOAD_TEXTURES_LENGTH[i], texturePixelBytes[i]);
+	}
+
+	for (int i = 0; i < texturesCount; i++)
+	{
+		modelInfo->insert(PAYLOAD_TEXTURES_DIMENSION_WIDTH[i], textureDimensionWidth[i]);
+	}
+
+	for (int i = 0; i < texturesCount; i++)
+	{
+		modelInfo->insert(PAYLOAD_TEXTURES_DIMENSION_HEIGHT[i], textureDimensionHeight[i]);
+	}
 
 	dataMessage->setInfoAndPayload(modelInfo, payload);
 

@@ -96,5 +96,19 @@ extern const QString LINE_INDICES;
 extern const QString TRIANGLE_INDICES;
 extern const QString PAYLOAD_POINTS_LENGTH;
 extern const QString PAYLOAD_TRIANGLES_LENGTH;
+
+// TODO: Payload texture length, payload texture coordinate length
+extern const QString PAYLOAD_TCOORDS_LENGTH;
+//extern const QString PAYLOAD_TEXTURE_ONE_LENGTH;
+//extern const QString PAYLOAD_TEXTURE_TWO_LENGTH;
+//extern const QString PAYLOAD_TEXTURE_THREE_LENGTH;
+//extern const QString PAYLOAD_TEXTURE_FOUR_LENGTH;
+//extern const QString PAYLOAD_TEXTURE_FIVE_LENGTH;
+
+extern const QString PAYLOAD_TEXTURES_COUNT;
+extern const QVector<QString> PAYLOAD_TEXTURES_LENGTH;
+extern const QVector<QString> PAYLOAD_TEXTURES_DIMENSION_WIDTH;
+extern const QVector<QString> PAYLOAD_TEXTURES_DIMENSION_HEIGHT;
+
 /// @}
 }
