@@ -413,6 +413,9 @@ bool DataMessageEncoder::toMessage(ModelData* data, MessagePtr dataMessage) {
 	for (int i = 0; i < texturesCount; i++) {
 		int* dims = data->getTexture(i)->GetDimensions();
 		int texturePayloadLength = dims[0] * dims[1] * 3 * sizeof(float);
+		QString textureName = data->getTexture(i)->GetObjectName().c_str();
+
+		qDebug() << "Texture name, before packaging:" << textureName;
 		
 		QByteArray texturePayload;
 		texturePayload.reserve(texturePayloadLength);
@@ -432,7 +435,7 @@ bool DataMessageEncoder::toMessage(ModelData* data, MessagePtr dataMessage) {
 
 		QJsonObject textureJson;
 		// TODO: How to name these?
-		textureJson.insert(TEXTURE_NAME, tr("Texture: %1").arg(i));
+		textureJson.insert(TEXTURE_NAME, textureName);
 		textureJson.insert(TEXTURE_DIMENSION_U, dims[0]);
 		textureJson.insert(TEXTURE_DIMENSION_V, dims[1]);
 		textureJson.insert(PAYLOAD_TEXTURE_LENGTH, texturePayloadLength);
