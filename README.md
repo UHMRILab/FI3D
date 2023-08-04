@@ -18,7 +18,7 @@ Executables:
 
 # Development Setup
 
-The basic setup requires [CMake >3.13](https://cmake.org/download/), [Qt 5.14.2](https://www.qt.io/download), [VTK 8.2](https://vtk.org/download/), and the [vtkDICOM](https://github.com/dgobbi/vtk-dicom) package. Please refer to the appropriate guide to setting up the project.
+The basic setup requires [CMake >3.13](https://cmake.org/download/), [Qt 6.4.2](https://www.qt.io/download), [VTK 9.2.6](https://vtk.org/download/), and the [vtkDICOM](https://github.com/dgobbi/vtk-dicom) package. Please refer to the appropriate guide to setting up the project.
 
 * [Windows](Documentation/WindowsSetup.MD)
 * [Mac](Documentation/MacSetup.MD)

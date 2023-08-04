@@ -67,7 +67,7 @@ The following instructions are under the assumption you are using Visual Studio 
   * Navigate and select `(Qt install path)\6.4.2\msvc_2019_64\bin\qmake.exe`
   * Click OK
 
-## VTK_v9.2.5
+## VTK_v9.2.6
 
 Download VTK source code from [here](https://www.vtk.org/download/). Then, follow these steps:
 
