@@ -424,7 +424,7 @@ bool DataMessageEncoder::toMessage(ModelData* data, MessagePtr dataMessage) {
 				//unsigned char* val = static_cast<unsigned char*>(data->getTexture(0)->GetScalarPointer(x, y, 0));
 
 				for (int j = 0; j < 3; j++) {
-					float value = data->getTexture(i)->GetScalarComponentAsFloat(x, y, 0, j);
+					float value = data->getTexture(i)->GetScalarComponentAsFloat(x, y, 0, j) / 255.0f;
 
 					//qDebug() << "Channel" << j <<  "of texture" << i << ":" << value;
 					texturePayload.append((const char*)&value, sizeof(float));
