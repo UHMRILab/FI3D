@@ -393,10 +393,11 @@ bool DataMessageEncoder::toMessage(ModelData* data, MessagePtr dataMessage) {
 	// for loop for appending to sub-payload
 	for (int i = 0; i < tcoordCount; i++) {
 		double* tcoord = data->GetPointData()->GetTCoords()->GetTuple(i);
-		for (int j = 0; j < 2; j++) {
-			float value = tcoord[j];
-			tcoordsPayload.append((const char*)&value, sizeof(float));
-		}
+		float x = tcoord[0];
+		float y = tcoord[1];
+
+		tcoordsPayload.append((const char*)&x, sizeof(float));
+		tcoordsPayload.append((const char*)&y, sizeof(float));
 	}
 
 	payload->append(tcoordsPayload);
@@ -416,7 +417,8 @@ bool DataMessageEncoder::toMessage(ModelData* data, MessagePtr dataMessage) {
 		QString textureName = data->getTexture(i)->GetObjectName().c_str();
 
 		qDebug() << "Texture name, before packaging:" << textureName;
-		
+
+		double* range = data->getTexture(i)->GetScalarRange();
 		QByteArray texturePayload;
 		texturePayload.reserve(texturePayloadLength);
 		for (int y = 0; y < dims[1]; y++) {
@@ -424,7 +426,7 @@ bool DataMessageEncoder::toMessage(ModelData* data, MessagePtr dataMessage) {
 				//unsigned char* val = static_cast<unsigned char*>(data->getTexture(0)->GetScalarPointer(x, y, 0));
 
 				for (int j = 0; j < 3; j++) {
-					float value = data->getTexture(i)->GetScalarComponentAsFloat(x, y, 0, j) / 255.0f;
+					float value = data->getTexture(i)->GetScalarComponentAsFloat(x, y, 0, j) / range[1];
 
 					//qDebug() << "Channel" << j <<  "of texture" << i << ":" << value;
 					texturePayload.append((const char*)&value, sizeof(float));
