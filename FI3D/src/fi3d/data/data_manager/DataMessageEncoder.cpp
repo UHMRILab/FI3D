@@ -384,7 +384,10 @@ bool DataMessageEncoder::toMessage(ModelData* data, MessagePtr dataMessage) {
 
 	// TODO: Add code for converting texture coordinates and textures to byte arrays
 	// TODO 1: Add code for converting texture coordinates to byte arrays
-	int tcoordCount = data->GetPointData()->GetTCoords()->GetNumberOfTuples();
+	int tcoordCount = 0;
+	if (data->GetPointData() != nullptr && data->GetPointData()->GetTCoords() != nullptr ) {
+		tcoordCount = data->GetPointData()->GetTCoords()->GetNumberOfTuples();
+	}
 	int tcoordBytes = tcoordCount * 2 * sizeof(float);
 
 	QByteArray tcoordsPayload;
